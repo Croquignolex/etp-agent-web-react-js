@@ -1,4 +1,4 @@
-export const USER_ROLE = "ADMIN";
+export const USER_ROLE = "AGENT";
 
 export const DEFAULT_GUEST_MESSAGE = "Request failed with status code 401";
 
