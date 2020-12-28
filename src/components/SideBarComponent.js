@@ -5,52 +5,29 @@ import React, {useState, useMemo} from 'react';
 import {APP_NAME} from "../constants/generalConstants";
 import {formatString} from "../functions/generalFunctions";
 import {
-    SIMS,
-    AGENTS,
     REQUESTS,
-    CHECKOUT,
-    OPERATIONS,
     RECOVERIES,
-    ALL_SIMS_PAGE,
-    AGENT_NEW_PAGE,
+    OPERATIONS,
     DASHBOARD_PAGE,
-    ALL_AGENTS_PAGE,
-    HANDING_OVER_PAGE,
     RECOVERIES_CASH_PAGE,
     REQUESTS_FLEETS_PAGE,
     RECOVERIES_FLEET_PAGE,
-    CHECKOUT_OUTlAYS_PAGE,
     OPERATIONS_FLEETS_PAGE,
-    CHECKOUT_PAYMENTS_PAGE,
-    OPERATIONS_AFFORDS_PAGE,
     REQUESTS_CLEARANCES_PAGE,
-    OPERATIONS_TRANSFERS_PAGE,
     OPERATIONS_CLEARANCES_PAGE,
-    OPERATIONS_ANONYMOUS_FLEETS_PAGE
 } from "../constants/pageNameConstants";
 import {
-    SIMS_PAGE_PATH,
-    AGENTS_PAGE_PATH,
     PROFILE_PAGE_PATH,
-    SIM_EDIT_PAGE_PATH,
-    AGENT_NEW_PAGE_PATH,
     DASHBOARD_PAGE_PATH,
-    AGENT_EDIT_PAGE_PATH,
-    HANDING_OVER_PAGE_PATH,
     REQUESTS_FLEETS_PAGE_PATH,
     RECOVERIES_CASH_PAGE_PATH,
-    CHECKOUT_OUTLAYS_PAGE_PATH,
-    CHECKOUT_PAYMENTS_PAGE_PATH,
     OPERATIONS_FLEETS_PAGE_PATH,
-    OPERATION_AFFORDS_PAGE_PATH,
     RECOVERIES_FLEETS_PAGE_PATH,
     REQUESTS_FLEET_NEW_PAGE_PATH,
     REQUESTS_FLEET_EDIT_PAGE_PATH,
     REQUESTS_CLEARANCES_PAGE_PATH,
-    OPERATIONS_TRANSFERS_PAGE_PATH,
     OPERATIONS_CLEARANCES_PAGE_PATH,
     REQUESTS_CLEARANCE_NEW_PAGE_PATH,
-    OPERATIONS_ANONYMOUS_FLEETS_PAGE_PATH
 } from "../constants/pagePathConstants";
 
 // Component
@@ -67,9 +44,6 @@ function SideBarComponent({user, pathname}) {
             buildRequestsMenu(),
             buildAuthorisedOperationsMenu(),
             buildAuthorisedRecoveriesMenu(),
-            buildAuthorisedCheckoutMenu(),
-            buildAuthorisedAgentMenu(),
-            buildAuthorisedSimsMenu(),
         ];
         // eslint-disable-next-line
     }, [pathname]);
@@ -191,11 +165,8 @@ function buildAuthorisedOperationsMenu() {
         name: OPERATIONS,
         icon: 'fa fa-exchange',
         sub: [
-            {name: OPERATIONS_TRANSFERS_PAGE, path: OPERATIONS_TRANSFERS_PAGE_PATH},
-            {name: OPERATIONS_ANONYMOUS_FLEETS_PAGE, path: OPERATIONS_ANONYMOUS_FLEETS_PAGE_PATH},
             {name: OPERATIONS_FLEETS_PAGE, path: OPERATIONS_FLEETS_PAGE_PATH},
             {name: OPERATIONS_CLEARANCES_PAGE, path: OPERATIONS_CLEARANCES_PAGE_PATH},
-            {name: OPERATIONS_AFFORDS_PAGE, path: OPERATION_AFFORDS_PAGE_PATH}
         ]
     }
 }
@@ -210,44 +181,6 @@ function buildAuthorisedRecoveriesMenu() {
             {name: RECOVERIES_FLEET_PAGE, path: RECOVERIES_FLEETS_PAGE_PATH},
         ]
     }
-}
-
-// Build checkout menu
-function buildAuthorisedCheckoutMenu() {
-    return {
-        name: CHECKOUT,
-        icon: 'fa fa-coins',
-        sub: [
-            {name: CHECKOUT_PAYMENTS_PAGE, path: CHECKOUT_PAYMENTS_PAGE_PATH},
-            {name: CHECKOUT_OUTlAYS_PAGE, path: CHECKOUT_OUTLAYS_PAGE_PATH},
-            {name: HANDING_OVER_PAGE, path: HANDING_OVER_PAGE_PATH},
-        ]
-    }
-}
-
-// Build agents menu
-function buildAuthorisedAgentMenu() {
-    return {
-        name: AGENTS,
-        icon: 'fa fa-user-cog',
-        sub: [
-            {name: ALL_AGENTS_PAGE, path: AGENTS_PAGE_PATH},
-            {name: AGENT_NEW_PAGE, path: AGENT_NEW_PAGE_PATH},
-            {name: INVISIBLE_MENU_ITEM, path: `${AGENT_EDIT_PAGE_PATH}/:id`}
-        ]
-    };
-}
-
-// Build sims menu
-function buildAuthorisedSimsMenu() {
-    return {
-        name: SIMS,
-        icon: 'fa fa-sim-card',
-        sub: [
-            {name: ALL_SIMS_PAGE, path: SIMS_PAGE_PATH},
-            {name: INVISIBLE_MENU_ITEM, path: `${SIM_EDIT_PAGE_PATH}/:id`}
-        ]
-    };
 }
 
 // Side bar drawer open
