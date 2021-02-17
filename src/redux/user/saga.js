@@ -1,18 +1,12 @@
 import { all, takeEvery, takeLatest, put, fork, call } from 'redux-saga/effects'
 
+import * as api from "../../constants/apiConstants";
 import {AUTH_URL} from "../../constants/generalConstants";
 import {USER_ROLE} from "../../constants/defaultConstants";
-import {apiPostRequest} from "../../functions/axiosFunctions";
+import {apiGetRequest, apiPostRequest} from "../../functions/axiosFunctions";
 import {getProfileImageFromServer} from "../../functions/generalFunctions";
 import {storeResetSettingsData, storeSetSettingsData} from "../settings/actions";
 import {LOCAL_STORAGE_USER_DATA, LOCAL_STORAGE_SETTINGS} from "../../constants/localStorageConstants";
-import {
-    LOGOUT_API_PATH,
-    EDIT_AVATAR_API_PATH,
-    EDIT_PROFILE_API_PATH,
-    EDIT_PASSWORD_API_PATH,
-    AUTHENTICATION_API_PATH
-} from "../../constants/apiConstants";
 import {
     setLocaleStorageItem,
     getLocaleStorageItem,
@@ -23,7 +17,9 @@ import {
     storeResetUserData,
     storeSetUserFullData,
     storeSetUserAvatarData,
+    storeSetUserBalanceData,
     EMIT_USER_AVATAR_UPDATE,
+    EMIT_FETCH_USER_BALANCE,
     EMIT_USER_PASSWORD_UPDATE,
     storeSetUserInformationData,
     EMIT_USER_INFORMATION_UPDATE,
@@ -38,12 +34,15 @@ import {
     storeUserProfileEditRequestInit,
     storeUserPasswordEditRequestInit,
     storeUserAvatarEditRequestFailed,
+    storeUserBalanceFetchRequestInit,
     storeUserProfileEditRequestFailed,
     storeUserAvatarEditRequestSucceed,
     storeUserPasswordEditRequestFailed,
     storeUserProfileEditRequestSucceed,
-    storeUserPasswordEditRequestSucceed
-} from "../requests/actions";
+    storeUserBalanceFetchRequestFailed,
+    storeUserPasswordEditRequestSucceed,
+    storeUserBalanceFetchRequestSucceed
+} from "../requests/user/actions";
 
 // Check user authentication from data in local storage
 export function* emitCheckUserAuthentication() {
@@ -90,7 +89,7 @@ export function* emitAttemptUserAuthentication() {
             yield call(setLocaleStorageItem, LOCAL_STORAGE_USER_DATA, {token});
             const data = {role: USER_ROLE};
             // API call
-            const apiResponse = yield call(apiPostRequest, AUTHENTICATION_API_PATH, data);
+            const apiResponse = yield call(apiPostRequest, api.AUTHENTICATION_API_PATH, data);
             // Extract data
             const {userData, settingsData, roleData} = extractUserAndSettingsData(apiResponse.data);
             // Deconstruction
@@ -131,7 +130,7 @@ export function* emitUserPasswordUpdate() {
             yield put(storeUserPasswordEditRequestInit());
             const data = {current_pass: oldPassword, new_pass: newPassword};
             // API call
-            const apiResponse = yield call(apiPostRequest, EDIT_PASSWORD_API_PATH, data);
+            const apiResponse = yield call(apiPostRequest, api.EDIT_PASSWORD_API_PATH, data);
             // Fire event for request
             yield put(storeUserPasswordEditRequestSucceed({message: apiResponse.message}));
         } catch (message) {
@@ -150,7 +149,7 @@ export function* emitUserInformationUpdate() {
             const data = {name, email, poste: post, adresse: address, description};
             const userData = yield call(getLocaleStorageItem, LOCAL_STORAGE_USER_DATA);
             // API call
-            const apiResponse = yield call(apiPostRequest, EDIT_PROFILE_API_PATH, data);
+            const apiResponse = yield call(apiPostRequest, api.EDIT_PROFILE_API_PATH, data);
             // Set user data into local storage
             yield call(setLocaleStorageItem, LOCAL_STORAGE_USER_DATA, {...userData, name, post, address, description});
             // Fire event for request
@@ -164,12 +163,32 @@ export function* emitUserInformationUpdate() {
     });
 }
 
+// Fetch user balance from API
+export function* emitFetchUserBalance() {
+    yield takeLatest(EMIT_FETCH_USER_BALANCE, function*() {
+        try {
+            // Fire event for request
+            yield put(storeUserBalanceFetchRequestInit());
+            const apiResponse = yield call(apiGetRequest, api.FETCH_BALANCE_API_PATH);
+            // Extract data
+            const balance = apiResponse.data.balance;
+            // Fire event to redux
+            yield put(storeSetUserBalanceData({balance}));
+            // Fire event for request
+            yield put(storeUserBalanceFetchRequestSucceed({message: apiResponse.message}));
+        } catch (message) {
+            // Fire event for request
+            yield put(storeUserBalanceFetchRequestFailed({message}));
+        }
+    });
+}
+
 // Remove user data present into local storage while logout from API
 export function* emitUserLogout() {
     yield takeLatest(EMIT_USER_LOGOUT, function*() {
         try {
             // Logout in API (Do not wait API response)
-            call(apiPostRequest, LOGOUT_API_PATH);
+            call(apiPostRequest, api.LOGOUT_API_PATH);
             // Remove all data in locale storage
             yield call(removeAllLocaleStorageItems);
             // Redirect to auth page
@@ -187,7 +206,7 @@ export function* emitUserAvatarUpdate() {
             const data = {base_64_image: avatar};
             const userData = yield call(getLocaleStorageItem, LOCAL_STORAGE_USER_DATA);
             // API call
-            const apiResponse = yield call(apiPostRequest, EDIT_AVATAR_API_PATH, data);
+            const apiResponse = yield call(apiPostRequest, api.EDIT_AVATAR_API_PATH, data);
             // Set user data into local storage
             yield call(setLocaleStorageItem, LOCAL_STORAGE_USER_DATA, {...userData, avatar});
             // Fire event for request
@@ -234,6 +253,7 @@ function extractUserAndSettingsData(apiResponse) {
 export default function* sagaUser() {
     yield all([
         fork(emitUserLogout),
+        fork(emitFetchUserBalance),
         fork(emitUserAvatarUpdate),
         fork(emitUserPasswordUpdate),
         fork(emitUserInformationUpdate),

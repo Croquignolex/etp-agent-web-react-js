@@ -8,8 +8,13 @@ import {emitUserAvatarUpdate} from "../../redux/user/actions";
 import {playWarningSound} from "../../functions/playSoundFunctions";
 import {requiredImageChecker} from "../../functions/checkerFunctions";
 import {DEFAULT_OBJECT_FORM_DATA} from "../../constants/defaultConstants";
-import {storeUserAvatarEditRequestReset} from "../../redux/requests/actions";
-import {applySuccess, requestFailed, requestLoading, requestSucceeded} from "../../functions/generalFunctions";
+import {storeUserAvatarEditRequestReset} from "../../redux/requests/user/actions";
+import {
+    applySuccess,
+    requestFailed,
+    requestLoading,
+    requestSucceeded
+} from "../../functions/generalFunctions";
 
 // Component
 function ProfileAvatarComponent({dispatch, request}) {
@@ -40,7 +45,7 @@ function ProfileAvatarComponent({dispatch, request}) {
 
     // Reset error alert
     const shouldResetErrorData = () => {
-        requestFailed(request) && dispatch(storeUserAvatarEditRequestReset());
+        dispatch(storeUserAvatarEditRequestReset());
     };
 
     // Trigger avatar form submit

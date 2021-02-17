@@ -3,32 +3,9 @@ import { Link } from 'react-router-dom';
 import React, {useState, useMemo} from 'react';
 
 import {APP_NAME} from "../constants/generalConstants";
+import * as path from "../constants/pagePathConstants";
+import * as page from "../constants/pageNameConstants";
 import {formatString} from "../functions/generalFunctions";
-import {
-    REQUESTS,
-    RECOVERIES,
-    OPERATIONS,
-    DASHBOARD_PAGE,
-    RECOVERIES_CASH_PAGE,
-    REQUESTS_FLEETS_PAGE,
-    RECOVERIES_FLEET_PAGE,
-    OPERATIONS_FLEETS_PAGE,
-    REQUESTS_CLEARANCES_PAGE,
-    OPERATIONS_CLEARANCES_PAGE,
-} from "../constants/pageNameConstants";
-import {
-    PROFILE_PAGE_PATH,
-    DASHBOARD_PAGE_PATH,
-    REQUESTS_FLEETS_PAGE_PATH,
-    RECOVERIES_CASH_PAGE_PATH,
-    OPERATIONS_FLEETS_PAGE_PATH,
-    RECOVERIES_FLEETS_PAGE_PATH,
-    REQUESTS_FLEET_NEW_PAGE_PATH,
-    REQUESTS_FLEET_EDIT_PAGE_PATH,
-    REQUESTS_CLEARANCES_PAGE_PATH,
-    OPERATIONS_CLEARANCES_PAGE_PATH,
-    REQUESTS_CLEARANCE_NEW_PAGE_PATH,
-} from "../constants/pagePathConstants";
 
 // Component
 function SideBarComponent({user, pathname}) {
@@ -40,9 +17,12 @@ function SideBarComponent({user, pathname}) {
     const authorisedMenu = useMemo(() => {
         return [
             buildDashboardMenu(),
+            buildNetworkMenu(),
             buildRequestsMenu(),
-            buildAuthorisedOperationsMenu(),
-            buildAuthorisedRecoveriesMenu(),
+            buildOperationsMenu(),
+            buildRecoveriesMenu(),
+            buildAgentsMenu(),
+            buildSimsMenu(),
         ];
         // eslint-disable-next-line
     }, [pathname]);
@@ -64,7 +44,7 @@ function SideBarComponent({user, pathname}) {
                         <img src={avatar} className="img-circle elevation-2" alt="avatar..."/>
                     </div>
                     <div className="info">
-                        <Link className="text-white" to={PROFILE_PAGE_PATH}>{formatString(name, 17)}</Link>
+                        <Link className="text-white" to={path.PROFILE_PAGE_PATH}>{formatString(name, 17)}</Link>
                     </div>
                 </div>
                 {/* Menu */}
@@ -134,53 +114,82 @@ const INVISIBLE_MENU_ITEM = 'INVISIBLE_MENU_ITEM';
 // Build dashboard menu
 function buildDashboardMenu() {
     return {
-        name: DASHBOARD_PAGE,
-        path: DASHBOARD_PAGE_PATH,
+        name: page.DASHBOARD_PAGE,
+        path: path.DASHBOARD_PAGE_PATH,
         icon: 'fa fa-tachometer-alt',
         sub: []
+    };
+}
+
+// Build :network menu
+function buildNetworkMenu() {
+    return {
+        name: page.MY_NETWORK,
+        icon: 'fa fa-network-wired',
+        sub: [
+            {name: page.MY_NETWORK_FLEET, path: path.NETWORK_FLEETS_PAGE_PATH},
+        ]
     };
 }
 
 // Build requests menu
 function buildRequestsMenu() {
     return {
-        name: REQUESTS,
+        name: page.REQUESTS,
         icon: 'fa fa-paste',
         sub: [
-            {name: REQUESTS_FLEETS_PAGE, path: REQUESTS_FLEETS_PAGE_PATH},
-            {name: REQUESTS_CLEARANCES_PAGE, path: REQUESTS_CLEARANCES_PAGE_PATH},
-
-            {name: INVISIBLE_MENU_ITEM, path: REQUESTS_FLEET_NEW_PAGE_PATH},
-            {name: INVISIBLE_MENU_ITEM, path: REQUESTS_CLEARANCE_NEW_PAGE_PATH},
-            {name: INVISIBLE_MENU_ITEM, path: `${REQUESTS_FLEET_EDIT_PAGE_PATH}/:id`},
-            {name: INVISIBLE_MENU_ITEM, path: `${REQUESTS_FLEET_EDIT_PAGE_PATH}/:id`},
+            {name: page.REQUESTS_FLEETS_PAGE, path: path.REQUESTS_FLEETS_PAGE_PATH},
+            {name: page.REQUESTS_CLEARANCES_PAGE, path: path.REQUESTS_CLEARANCES_PAGE_PATH}
         ]
     };
 }
 
 // Build operations menu
-function buildAuthorisedOperationsMenu() {
+function buildOperationsMenu() {
     return {
-        name: OPERATIONS,
-        icon: 'fa fa-exchange',
+        name: page.OPERATIONS,
+        icon: 'fa fa-bars',
         sub: [
-            {name: OPERATIONS_FLEETS_PAGE, path: OPERATIONS_FLEETS_PAGE_PATH},
-            {name: OPERATIONS_CLEARANCES_PAGE, path: OPERATIONS_CLEARANCES_PAGE_PATH},
+            {name: page.OPERATIONS_TRANSFERS_PAGE, path: path.OPERATIONS_TRANSFERS_PAGE_PATH},
+            {name: page.OPERATIONS_FLEETS_PAGE, path: path.OPERATIONS_FLEETS_PAGE_PATH},
+            {name: page.OPERATIONS_CLEARANCES_PAGE, path: path.OPERATIONS_CLEARANCES_PAGE_PATH},
+            {name: page.OPERATIONS_AFFORDS_PAGE, path: path.OPERATION_AFFORDS_PAGE_PATH}
         ]
     }
 }
 
 // Build recoveries menu
-function buildAuthorisedRecoveriesMenu() {
+function buildRecoveriesMenu() {
     return {
-        name: RECOVERIES,
+        name: page.RECOVERIES,
         icon: 'fa fa-share',
         sub: [
-            {name: RECOVERIES_CASH_PAGE, path: RECOVERIES_CASH_PAGE_PATH},
-            {name: RECOVERIES_FLEET_PAGE, path: RECOVERIES_FLEETS_PAGE_PATH},
+            {name: page.RECOVERIES_CASH_PAGE, path: path.RECOVERIES_CASH_PAGE_PATH},
+            {name: page.RECOVERIES_FLEET_PAGE, path: path.RECOVERIES_FLEETS_PAGE_PATH},
         ]
     }
 }
+
+// Build agents menu
+function buildAgentsMenu() {
+    return {
+        name: page.AGENTS,
+        path: path.AGENTS_PAGE_PATH,
+        icon: 'fa fa-user-cog',
+        sub: []
+    };
+}
+
+// Build sims menu
+function buildSimsMenu() {
+    return {
+        name: page.SIMS_PAGE,
+        path: path.SIMS_PAGE_PATH,
+        icon: 'fa fa-sim-card',
+        sub: []
+    };
+}
+
 
 // Side bar drawer open
 function drawer(toggle, key, sub, activePage) {

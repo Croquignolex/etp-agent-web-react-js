@@ -7,9 +7,14 @@ import ErrorAlertComponent from "../ErrorAlertComponent";
 import {emitUserPasswordUpdate} from "../../redux/user/actions";
 import {DEFAULT_FORM_DATA} from "../../constants/defaultConstants";
 import {playWarningSound} from "../../functions/playSoundFunctions";
-import {storeUserPasswordEditRequestReset} from "../../redux/requests/actions";
+import {storeUserPasswordEditRequestReset} from "../../redux/requests/user/actions";
 import {passwordChecker, passwordConfirmChecker} from "../../functions/checkerFunctions";
-import {requestLoading, requestSucceeded, requestFailed, applySuccess} from "../../functions/generalFunctions";
+import {
+    applySuccess,
+    requestFailed,
+    requestLoading,
+    requestSucceeded
+} from "../../functions/generalFunctions";
 
 // Component
 function ProfilePasswordComponent({request, dispatch}) {
@@ -55,7 +60,7 @@ function ProfilePasswordComponent({request, dispatch}) {
 
     // Reset error alert
     const shouldResetErrorData = () => {
-        requestFailed(request) && dispatch(storeUserPasswordEditRequestReset());
+        dispatch(storeUserPasswordEditRequestReset());
     };
 
     // Trigger password form submit
@@ -128,4 +133,5 @@ ProfilePasswordComponent.propTypes = {
     request: PropTypes.object.isRequired,
 };
 
-export default React.memo(ProfilePasswordComponent);
+export default
+React.memo(ProfilePasswordComponent);

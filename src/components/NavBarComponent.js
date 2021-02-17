@@ -3,7 +3,6 @@ import React, {Fragment} from 'react';
 import { Link } from 'react-router-dom';
 
 import {emitUserLogout} from "../redux/user/actions";
-import {USER_ROLE} from "../constants/defaultConstants";
 import {emitNotificationRead} from "../redux/notifications/actions";
 import {dateToString, formatString} from "../functions/generalFunctions";
 import {PROFILE_PAGE, SETTINGS_PAGE} from "../constants/pageNameConstants";
@@ -11,6 +10,10 @@ import {NOTIFICATIONS_PAGE_PATH, PROFILE_PAGE_PATH, SETTINGS_PAGE_PATH} from "..
 
 // Component
 function NavBarComponent({userName, unreadNotifications, dispatch}) {
+    const handleLogout = () => {
+        dispatch(emitUserLogout());
+    }
+
     // Render
     return (
         <nav id="app-navbar" className="main-header navbar navbar-expand navbar-white navbar-light">
@@ -25,7 +28,7 @@ function NavBarComponent({userName, unreadNotifications, dispatch}) {
             <ul className='navbar-nav ml-auto'>
                 <li className='text-center'>
                     {formatString(userName, 19)}<br/>
-                    <strong className='text-theme'>{USER_ROLE}</strong>
+                    <strong className='text-theme'>RESPONSABLE DE ZONE</strong>
                 </li>
             </ul>
             {/* Nav bar*/}
@@ -43,15 +46,16 @@ function NavBarComponent({userName, unreadNotifications, dispatch}) {
                         {unreadNotifications.map((item, index) => (
                             (index < 5) &&
                                 <Fragment key={index}>
-                                    <Link className="dropdown-item"
-                                          to={item.url}
+                                    <Link to={item.url}
+                                          className="dropdown-item"
                                           onClick={() => dispatch(emitNotificationRead({id: item.id}))}
                                     >
                                         <div className="media">
                                             <div className="media-body">
                                                 <p className="text-sm">{item.message}</p>
                                                 <p className="text-sm text-muted">
-                                                    <i className={`far fa-clock mr-1 ${item.className}`} /> {dateToString(item.creation)}
+                                                    <i className={`far fa-clock mr-2 ${item.className}`} />
+                                                    {dateToString(item.creation)}
                                                 </p>
                                             </div>
                                         </div>
@@ -66,7 +70,6 @@ function NavBarComponent({userName, unreadNotifications, dispatch}) {
                 </li>
                 {/* User menu */}
                 <li className="nav-item dropdown">
-                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <span className="nav-link hand-cursor" data-toggle="dropdown">
                         <i className="far fa-user"/>
                     </span>
@@ -80,10 +83,9 @@ function NavBarComponent({userName, unreadNotifications, dispatch}) {
                         </Link>
                         <div className="dropdown-divider"/>
                         {/* Logout */}
-                        <span className="dropdown-item dropdown-footer bg-danger text-white hand-cursor"
-                              onClick={() => dispatch(emitUserLogout())}>
-                                <i className='fa fa-sign-out' /> Deconnexion
-                            </span>
+                        <span className="dropdown-item dropdown-footer bg-danger text-white hand-cursor" onClick={handleLogout}>
+                            <i className='fa fa-sign-out' /> Deconnexion
+                        </span>
                     </div>
                 </li>
             </ul>

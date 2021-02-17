@@ -1,8 +1,10 @@
 import PropTypes from "prop-types";
-import React, {useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 
+import * as setting from "../constants/settingsConstants";
 import HeaderComponent from "../components/HeaderComponent";
 import {SETTINGS_PAGE} from "../constants/pageNameConstants";
+import {emitSettingsUpdate} from "../redux/settings/actions";
 import {requiredChecker} from "../functions/checkerFunctions";
 import InputComponent from "../components/form/InputComponent";
 import {playWarningSound} from "../functions/playSoundFunctions";
@@ -10,22 +12,43 @@ import ButtonComponent from "../components/form/ButtonComponent";
 import SelectComponent from "../components/form/SelectComponent";
 import AppLayoutContainer from "../containers/AppLayoutContainer";
 import ErrorAlertComponent from "../components/ErrorAlertComponent";
-import {storeSettingsRequestReset} from "../redux/requests/actions";
 import TextareaComponent from "../components/form/TextareaComponent";
 import CheckBoxComponent from "../components/form/CheckBoxComponent";
-import {requestFailed, requestLoading} from "../functions/generalFunctions";
+import {storeSettingsRequestReset} from "../redux/requests/settings/actions";
 import {DEFAULT_ARRAY_FORM_DATA, DEFAULT_FORM_DATA} from "../constants/defaultConstants";
-import {emitSettingsUpdate} from "../redux/settings/actions";
+import {
+    applySuccess,
+    requestFailed,
+    requestLoading,
+    requestSucceeded
+} from "../functions/generalFunctions";
 
 // Component
 function SettingsPage({settings, request, dispatch, location}) {
     // Local state
     const [sound, setSound] = useState(settings.sound);
     const [bars, setBars] = useState({...DEFAULT_ARRAY_FORM_DATA, data: settings.bars});
-    const [session, setSession] = useState({...DEFAULT_FORM_DATA, val: settings.session});
+    const [session, setSession] = useState({...DEFAULT_FORM_DATA, data: settings.session});
     const [cards, setCards] = useState({...DEFAULT_ARRAY_FORM_DATA, data: settings.cards});
     const [charts, setCharts] = useState({...DEFAULT_ARRAY_FORM_DATA, data: settings.charts});
-    const [description, setDescription] = useState({...DEFAULT_FORM_DATA, val: settings.description});
+    const [description, setDescription] = useState({...DEFAULT_FORM_DATA, data: settings.description});
+
+    // Local effects
+    useEffect(() => {
+        // Reset inputs while toast (well done) into current scope
+        if(requestSucceeded(request)) {
+            applySuccess(request.message);
+        }
+    }, [request]);
+
+    // Local effects
+    useEffect(() => {
+        // Cleaner error alert while component did unmount without store dependency
+        return () => {
+            shouldResetErrorData();
+        };
+        // eslint-disable-next-line
+    }, []);
 
     // Data
     const settingsData = useMemo(() => {
@@ -34,17 +57,16 @@ function SettingsPage({settings, request, dispatch, location}) {
                 // {value: 0, label: 'name'}
             ],
             cards: [
-                {value: 0, label: 'Mon solde'},
-                {value: 1, label: 'Flotte des PUCE DE FLOTTAGE'},
-                {value: 2, label: 'Demandes de flote'},
-                {value: 3, label: 'Agents'},
-                {value: 4, label: 'Puces'},
-                {value: 5, label: 'Demandes de déstockage'}
+                {value: setting.CARD_AGENTS, label: setting.LABEL_AGENTS},
+                {value: setting.CARD_BALANCE, label: setting.LABEL_BALANCE},
+                {value: setting.CARD_RESOURCES, label: setting.LABEL_RESOURCES},
+                {value: setting.CARD_FLEETS_REQUESTS, label: setting.LABEL_FLEETS_REQUESTS},
+                {value: setting.CARD_ACCOUNTS_BALANCE, label: setting.LABEL_ACCOUNTS_BALANCE},
+                {value: setting.CARD_FLEET_SIMS_FLEETS, label: setting.LABEL_FLEET_SIMS_FLEETS},
+                {value: setting.CARD_CLEARANCES_REQUEST, label: setting.LABEL_CLEARANCES_REQUEST}
             ],
             charts: [
-                {value: 0, label: 'Demandes de flote par status'},
-                {value: 1, label: 'Puces par types'},
-                {value: 2, label: 'Demandes de déstockage par status'},
+                // {value: 0, label: 'name'}
             ]
         };
         // eslint-disable-next-line
@@ -82,7 +104,7 @@ function SettingsPage({settings, request, dispatch, location}) {
 
     // Reset error alert
     const shouldResetErrorData = () => {
-        requestFailed(request) && dispatch(storeSettingsRequestReset());
+        dispatch(storeSettingsRequestReset());
     };
 
     // Trigger setting form submit

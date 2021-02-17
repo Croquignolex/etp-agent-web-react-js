@@ -4,6 +4,7 @@ import React, {useMemo} from 'react';
 
 // Component
 function SelectComponent({id, multi, label, options, title, input, requestProcessing, handleInput}) {
+
     const handleChange = (selected) => {
         if(!multi) handleInput(selected.value);
         else {
@@ -45,8 +46,8 @@ function SelectComponent({id, multi, label, options, title, input, requestProces
         <>
             <div className='mb-3'>
                 <label htmlFor={id}>{label}</label>
-                <Select options={data}
-                        isMulti={multi}
+                <Select isMulti={multi}
+                        options={options}
                         placeholder={title}
                         value={defaultValue}
                         styles={customStyles}
@@ -68,11 +69,11 @@ function findIntoData(needle, dataArray) {
 SelectComponent.propTypes = {
     multi: PropTypes.bool,
     id: PropTypes.string.isRequired,
-    data: PropTypes.array.isRequired,
     requestProcessing: PropTypes.bool,
     title: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     input: PropTypes.object.isRequired,
+    options: PropTypes.array.isRequired,
     handleInput: PropTypes.func.isRequired,
 };
 
