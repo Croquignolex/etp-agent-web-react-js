@@ -3,7 +3,6 @@ import { all } from 'redux-saga/effects';
 import user from './user/saga';
 import sims from './sims/saga';
 import zones from './zones/saga';
-import agents from './agents/saga';
 import fleets from './fleets/saga';
 import returns from './returns/saga';
 import refuels from './refuels/saga';
@@ -25,7 +24,6 @@ export default function* sagas() {
         user(),
         sims(),
         zones(),
-        agents(),
         fleets(),
         returns(),
         refuels(),

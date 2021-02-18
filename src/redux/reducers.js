@@ -2,7 +2,6 @@ import user from './user/reducer';
 import sims from './sims/reducer';
 import zones from './zones/reducer';
 import fleets from './fleets/reducer';
-import agents from './agents/reducer';
 import returns from './returns/reducer';
 import refuels from './refuels/reducer';
 import affords from './affords/reducer';
@@ -18,7 +17,6 @@ import userRequests from './requests/user/reducer';
 import simsRequests from './requests/sims/reducer';
 import notifications from './notifications/reducer';
 import zonesRequests from './requests/zones/reducer';
-import agentsRequests from './requests/agents/reducer';
 import fleetsRequests from './requests/fleets/reducer';
 import networkSupplies from './networkSupplies/reducer';
 import refuelsRequests from './requests/refuels/reducer';
@@ -40,7 +38,6 @@ export default {
     user,
     sims,
     zones,
-    agents,
     fleets,
     returns,
     refuels,
@@ -58,7 +55,6 @@ export default {
     zonesRequests,
     notifications,
     fleetsRequests,
-    agentsRequests,
     networkSupplies,
     returnsRequests,
     refuelsRequests,

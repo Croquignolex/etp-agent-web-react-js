@@ -16,12 +16,11 @@ function SideBarComponent({user, pathname}) {
     const {name, avatar} = user;
     const authorisedMenu = useMemo(() => {
         return [
-            buildDashboardMenu(),
-            buildNetworkMenu(),
-            buildRequestsMenu(),
-            buildOperationsMenu(),
-            buildRecoveriesMenu(),
-            buildAgentsMenu(),
+            // buildDashboardMenu(),
+            // buildNetworkMenu(),
+            // buildRequestsMenu(),
+            // buildOperationsMenu(),
+            // buildRecoveriesMenu(),
             buildSimsMenu(),
         ];
         // eslint-disable-next-line
@@ -168,16 +167,6 @@ function buildRecoveriesMenu() {
             {name: page.RECOVERIES_FLEET_PAGE, path: path.RECOVERIES_FLEETS_PAGE_PATH},
         ]
     }
-}
-
-// Build agents menu
-function buildAgentsMenu() {
-    return {
-        name: page.AGENTS,
-        path: path.AGENTS_PAGE_PATH,
-        icon: 'fa fa-user-cog',
-        sub: []
-    };
 }
 
 // Build sims menu
