@@ -1,21 +1,11 @@
+import React from 'react';
 import PropTypes from "prop-types";
-import React, {useState} from 'react';
 
 import {DONE} from "../../constants/typeConstants";
-import FormModalComponent from "../modals/FormModalComponent";
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
-import AgentDetailsContainer from "../../containers/agents/AgentDetailsContainer";
 
 // Component
 function OperationsClearancesCardsComponent({refuels}) {
-    // Local states
-    const [agentDetailsModal, setAgentDetailsModal] = useState({show: false, header: "DETAIL DE L'AGENT/RESSOURCE", id: ''});
-
-    // Hide agent details modal form
-    const handleAgentDetailsModalHide = () => {
-        setAgentDetailsModal({...agentDetailsModal, show: false})
-    }
-
     // Render
     return (
         <>
@@ -34,15 +24,6 @@ function OperationsClearancesCardsComponent({refuels}) {
                                         <li className="list-group-item">
                                             <b>Créer le</b>
                                             <span className="float-right">{dateToString(item.creation)}</span>
-                                        </li>
-                                        <li className="list-group-item">
-                                            <b>Agent/Ressource</b>
-                                            <span className="float-right">
-                                                {item.agent.name}
-                                                <i className="fa fa-question-circle small ml-1 hand-cursor text-theme"
-                                                   onClick={() => setAgentDetailsModal({...agentDetailsModal, show: true, id: item.agent.id})}
-                                                />
-                                            </span>
                                         </li>
                                         <li className="list-group-item">
                                             <b>Puce réceptrice</b>
@@ -75,10 +56,6 @@ function OperationsClearancesCardsComponent({refuels}) {
                     </div>
                 }
             </div>
-            {/* Modal */}
-            <FormModalComponent modal={agentDetailsModal} handleClose={handleAgentDetailsModalHide}>
-                <AgentDetailsContainer id={agentDetailsModal.id} />
-            </FormModalComponent>
         </>
     )
 }

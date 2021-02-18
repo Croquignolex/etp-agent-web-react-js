@@ -3,21 +3,17 @@ import React, {useEffect, useState} from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import {emitAllSimsFetch} from "../../redux/sims/actions";
-import {emitAllAgentsFetch} from "../../redux/agents/actions";
 import HeaderComponent from "../../components/HeaderComponent";
 import LoaderComponent from "../../components/LoaderComponent";
 import AppLayoutContainer from "../../containers/AppLayoutContainer";
 import ErrorAlertComponent from "../../components/ErrorAlertComponent";
 import TableSearchComponent from "../../components/TableSearchComponent";
 import {storeAllSimsRequestReset} from "../../redux/requests/sims/actions";
-import FormModalComponent from "../../components/modals/FormModalComponent";
 import {OPERATIONS_CLEARANCES_PAGE} from "../../constants/pageNameConstants";
-import {storeAllAgentsRequestReset} from "../../redux/requests/agents/actions";
 import {emitNextRefuelsFetch, emitRefuelsFetch} from "../../redux/refuels/actions";
 import {dateToString, needleSearch, requestFailed, requestLoading} from "../../functions/generalFunctions";
 import {storeRefuelsRequestReset, storeNextRefuelsRequestReset} from "../../redux/requests/refuels/actions";
 import OperationsClearancesCardsComponent from "../../components/operations/OperationsClearancesCardsComponent";
-import OperationsClearancesAddRefuelContainer from "../../containers/operations/OperationsClearancesAddRefuelContainer";
 
 // Component
 function OperationsClearancesPage({refuels, refuelsRequests, hasMoreData, page, dispatch, location}) {
@@ -29,7 +25,6 @@ function OperationsClearancesPage({refuels, refuelsRequests, hasMoreData, page, 
     useEffect(() => {
         dispatch(emitRefuelsFetch());
         dispatch(emitAllSimsFetch());
-        dispatch(emitAllAgentsFetch());
         // Cleaner error alert while component did unmount without store dependency
         return () => {
             shouldResetErrorData();
@@ -45,7 +40,6 @@ function OperationsClearancesPage({refuels, refuelsRequests, hasMoreData, page, 
     const shouldResetErrorData = () => {
         dispatch(storeRefuelsRequestReset());
         dispatch(storeAllSimsRequestReset());
-        dispatch(storeAllAgentsRequestReset());
         dispatch(storeNextRefuelsRequestReset());
     };
 
@@ -57,11 +51,6 @@ function OperationsClearancesPage({refuels, refuelsRequests, hasMoreData, page, 
     // Show refuel modal form
     const handleRefuelModalShow = (item) => {
         setRefuelModal({...refuelModal, item, show: true})
-    }
-
-    // Hide refuel modal form
-    const handleRefuelModalHide = () => {
-        setRefuelModal({...refuelModal, show: false})
     }
 
     // Render
@@ -113,10 +102,6 @@ function OperationsClearancesPage({refuels, refuelsRequests, hasMoreData, page, 
                     </section>
                 </div>
             </AppLayoutContainer>
-            {/* Modal */}
-            <FormModalComponent modal={refuelModal} handleClose={handleRefuelModalHide}>
-                <OperationsClearancesAddRefuelContainer handleClose={handleRefuelModalHide} />
-            </FormModalComponent>
         </>
     )
 }
