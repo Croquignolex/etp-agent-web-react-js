@@ -35,6 +35,10 @@ function RequestsFleetsCardsComponent({fleets}) {
                                             <b>Puce à flotter</b>
                                             <span className="float-right">{item.sim.number}</span>
                                         </li>
+                                        <li className="list-group-item">
+                                            <b>Demandeur</b>
+                                            <span className="float-right">{item.claimant.name}</span>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

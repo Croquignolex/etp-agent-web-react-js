@@ -12,22 +12,15 @@ import TableSearchComponent from "../../components/TableSearchComponent";
 import {storeAllSimsRequestReset} from "../../redux/requests/sims/actions";
 import FormModalComponent from "../../components/modals/FormModalComponent";
 import {emitClearancesFetch, emitNextClearancesFetch} from "../../redux/clearances/actions";
+import {dateToString, needleSearch, requestFailed,requestLoading} from "../../functions/generalFunctions";
 import RequestsClearancesCardsComponent from "../../components/requests/RequestsClearancesCardsComponent";
-import RequestsClearancesAddDeclareContainer from "../../containers/requests/RequestsClearancesAddDeclareContainer";
 import {storeClearancesRequestReset, storeNextClearancesRequestReset} from "../../redux/requests/clearances/actions";
 import RequestsClearancesAddClearanceContainer from "../../containers/requests/RequestsClearancesAddClearanceContainer";
-import {
-    dateToString,
-    needleSearch,
-    requestFailed,
-    requestLoading,
-} from "../../functions/generalFunctions";
 
 // Component
 function RequestsClearancesPage({clearances, clearancesRequests, hasMoreData, page, dispatch, location}) {
     // Local states
     const [needle, setNeedle] = useState('');
-    const [declareModal, setDeclareModal] = useState({show: false, header: 'PRENDRE EN CHARGE', item: {}});
     const [clearanceModal, setClearanceModal] = useState({show: false, header: 'PASSER UNE DEMANDE DE DESTOCKAGE'});
 
     // Local effects
@@ -67,16 +60,6 @@ function RequestsClearancesPage({clearances, clearancesRequests, hasMoreData, pa
         setClearanceModal({...clearanceModal, show: false})
     }
 
-    // Show declare modal form
-    const handleDeclareModalShow = (item) => {
-        setDeclareModal({...declareModal, item, show: true})
-    }
-
-    // Hide declare modal form
-    const handleDeclareModalHide = () => {
-        setDeclareModal({...declareModal, show: false})
-    }
-
     // Render
     return (
         <>
@@ -106,9 +89,7 @@ function RequestsClearancesPage({clearances, clearancesRequests, hasMoreData, pa
                                             </button>
                                             {/* Search result & Infinite scroll */}
                                             {(needle !== '' && needle !== undefined)
-                                                ? <RequestsClearancesCardsComponent clearances={searchEngine(clearances, needle)}
-                                                                                    handleDeclareModalShow={handleDeclareModalShow}
-                                                />
+                                                ? <RequestsClearancesCardsComponent clearances={searchEngine(clearances, needle)} />
                                                 : (requestLoading(clearancesRequests.list) ? <LoaderComponent /> :
                                                         <InfiniteScroll hasMore={hasMoreData}
                                                                         loader={<LoaderComponent />}
@@ -116,9 +97,7 @@ function RequestsClearancesPage({clearances, clearancesRequests, hasMoreData, pa
                                                                         style={{ overflow: 'hidden' }}
                                                                         next={handleNextClearancesData}
                                                         >
-                                                            <RequestsClearancesCardsComponent clearances={clearances}
-                                                                                              handleDeclareModalShow={handleDeclareModalShow}
-                                                            />
+                                                            <RequestsClearancesCardsComponent clearances={clearances} />
                                                         </InfiniteScroll>
                                                 )
                                             }
@@ -133,11 +112,6 @@ function RequestsClearancesPage({clearances, clearancesRequests, hasMoreData, pa
             {/* Modal */}
             <FormModalComponent modal={clearanceModal} handleClose={handleClearanceModalHide}>
                 <RequestsClearancesAddClearanceContainer handleClose={handleClearanceModalHide} />
-            </FormModalComponent>
-            <FormModalComponent modal={declareModal} handleClose={handleDeclareModalHide}>
-                <RequestsClearancesAddDeclareContainer clearance={declareModal.item}
-                                                       handleClose={handleDeclareModalHide}
-                />
             </FormModalComponent>
         </>
     )

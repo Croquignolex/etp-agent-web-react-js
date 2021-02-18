@@ -23,8 +23,8 @@ export const NEW_FLEET_API_PATH = `${API_URL}/demande_flote`;
 export const FLEETS_API_PATH = `${API_URL}/list_all_demandes_flote`;
 export const ALL_FLEETS_API_PATH = `${API_URL}/list_demandes_flote_collector_all`;
 
-export const CLEARANCES_API_PATH = `${API_URL}/list_demandes_destockage`;
 export const NEW_CLEARANCE_API_PATH = `${API_URL}/demande_destockage_agent`;
+export const CLEARANCES_API_PATH = `${API_URL}/list_all_demandes_destockage`;
 export const ALL_CLEARANCES_API_PATH = `${API_URL}/list_demandes_destockage_all`;
 export const DECLARE_CLEARANCE_API_PATH = `${API_URL}/reponse_demandes_destockage`;
 

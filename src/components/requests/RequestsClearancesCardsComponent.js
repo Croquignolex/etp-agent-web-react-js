@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-import LoaderComponent from "../LoaderComponent";
 import {fleetTypeBadgeColor} from "../../functions/typeFunctions";
-import {PENDING, PROCESSING} from "../../constants/typeConstants";
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
 
 // Component
-function RequestsClearancesCardsComponent({clearances, handleDeclareModalShow}) {
+function RequestsClearancesCardsComponent({clearances}) {
     // Render
     return (
         <>
@@ -41,18 +39,6 @@ function RequestsClearancesCardsComponent({clearances, handleDeclareModalShow}) 
                                             <b>Demandeur</b>
                                             <span className="float-right">{item.claimant.name}</span>
                                         </li>
-                                        {[PENDING, PROCESSING].includes(item.status) &&
-                                            <div className="mt-3 text-center">
-                                                {item.actionLoader ? <LoaderComponent little={true} /> :
-                                                    <button type="button"
-                                                            className="btn btn-theme"
-                                                            onClick={() => handleDeclareModalShow(item)}
-                                                    >
-                                                        <i className="fa fa-plus" /> Prendre en charge
-                                                    </button>
-                                                }
-                                            </div>
-                                        }
                                     </ul>
                                 </div>
                             </div>
@@ -73,8 +59,7 @@ function RequestsClearancesCardsComponent({clearances, handleDeclareModalShow}) 
 
 // Prop types to ensure destroyed props data type
 RequestsClearancesCardsComponent.propTypes = {
-    clearances: PropTypes.array.isRequired,
-    handleDeclareModalShow: PropTypes.func.isRequired,
+    clearances: PropTypes.array.isRequired
 };
 
 export default React.memo(RequestsClearancesCardsComponent);
