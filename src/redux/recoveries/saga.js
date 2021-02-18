@@ -113,7 +113,6 @@ function extractRecoveriesData(apiRecoveries) {
 // Combine to export all functions at once
 export default function* sagaRecoveries() {
     yield all([
-        fork(emitNewRecovery),
         fork(emitRecoveriesFetch),
         fork(emitNextRecoveriesFetch),
     ]);
