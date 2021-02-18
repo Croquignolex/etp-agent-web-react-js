@@ -17,8 +17,7 @@ function SideBarComponent({user, pathname}) {
     const authorisedMenu = useMemo(() => {
         return [
             // buildDashboardMenu(),
-            // buildNetworkMenu(),
-            // buildRequestsMenu(),
+            buildRequestsMenu(),
             // buildOperationsMenu(),
             buildRecoveriesMenu(),
             buildSimsMenu(),
@@ -117,17 +116,6 @@ function buildDashboardMenu() {
         path: path.DASHBOARD_PAGE_PATH,
         icon: 'fa fa-tachometer-alt',
         sub: []
-    };
-}
-
-// Build :network menu
-function buildNetworkMenu() {
-    return {
-        name: page.MY_NETWORK,
-        icon: 'fa fa-network-wired',
-        sub: [
-            {name: page.MY_NETWORK_FLEET, path: path.NETWORK_FLEETS_PAGE_PATH},
-        ]
     };
 }
 
