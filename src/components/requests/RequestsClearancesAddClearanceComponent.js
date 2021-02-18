@@ -11,19 +11,13 @@ import {DEFAULT_FORM_DATA} from "../../constants/defaultConstants";
 import {playWarningSound} from "../../functions/playSoundFunctions";
 import {dataToArrayForSelect, mappedSims} from "../../functions/arrayFunctions";
 import {storeAddClearanceRequestReset} from "../../redux/requests/clearances/actions";
-import {
-    applySuccess,
-    requestFailed,
-    requestLoading,
-    requestSucceeded
-} from "../../functions/generalFunctions";
+import {applySuccess, requestFailed, requestLoading, requestSucceeded} from "../../functions/generalFunctions";
 
 // Component
-function RequestsClearancesAddClearanceComponent({request, sims, agents, allAgentsRequests, allSimsRequests, dispatch, handleClose}) {
+function RequestsClearancesAddClearanceComponent({request, sims, user, allSimsRequests, dispatch, handleClose}) {
     // Local state
     const [amount, setAmount] = useState(DEFAULT_FORM_DATA);
     const [incomingSim, setIncomingSim] = useState(DEFAULT_FORM_DATA);
-    const [agent, setAgent] = useState({...DEFAULT_FORM_DATA, data: 0});
 
     // Local effects
     useEffect(() => {
@@ -54,20 +48,10 @@ function RequestsClearancesAddClearanceComponent({request, sims, agents, allAgen
         setAmount({...amount, isValid: true, data})
     }
 
-    const handleAgentSelect = (data) => {
-        shouldResetErrorData();
-        setAgent({...agent,  isValid: true, data})
-    }
-
-    // Build select options
-    const agentSelectOptions = useMemo(() => {
-        return dataToArrayForSelect(agents)
-    }, [agents]);
-
     // Build select options
     const incomingSelectOptions = useMemo(() => {
-        return dataToArrayForSelect(mappedSims(sims.filter(item => item.agent.id === agent.data)))
-    }, [sims, agent.data]);
+        return dataToArrayForSelect(mappedSims(sims.filter(item => item.agent.id === user.id)))
+    }, [sims, user.id]);
 
     // Reset error alert
     const shouldResetErrorData = () => {
@@ -78,18 +62,16 @@ function RequestsClearancesAddClearanceComponent({request, sims, agents, allAgen
     const handleSubmit = (e) => {
         e.preventDefault();
         shouldResetErrorData();
-        const _agent = requiredChecker(agent);
         const _amount = requiredChecker(amount);
         const _incomingSim = requiredChecker(incomingSim);
         // Set value
-        setAgent(_agent);
         setAmount(_amount);
         setIncomingSim(_incomingSim);
-        const validationOK = (_amount.isValid && _incomingSim.isValid && _agent.isValid);
+        const validationOK = (_amount.isValid && _incomingSim.isValid);
         // Check
         if(validationOK) {
             dispatch(emitAddClearance({
-                agent: _agent.data,
+                id: user.id,
                 amount: _amount.data,
                 sim: _incomingSim.data,
             }));
@@ -102,19 +84,8 @@ function RequestsClearancesAddClearanceComponent({request, sims, agents, allAgen
         <>
             {requestFailed(request) && <ErrorAlertComponent message={request.message} />}
             {requestFailed(allSimsRequests) && <ErrorAlertComponent message={allSimsRequests.message} />}
-            {requestFailed(allAgentsRequests) && <ErrorAlertComponent message={allAgentsRequests.message} />}
             <form onSubmit={handleSubmit}>
                 <div className='row'>
-                    <div className='col-sm-6'>
-                        <SelectComponent input={agent}
-                                         id='inputSimAgent'
-                                         label='Agent/ressource'
-                                         options={agentSelectOptions}
-                                         handleInput={handleAgentSelect}
-                                         title='Choisir un agent/ressource'
-                                         requestProcessing={requestLoading(allAgentsRequests)}
-                        />
-                    </div>
                     <div className='col-sm-6'>
                         <SelectComponent input={incomingSim}
                                          id='inputSimAgent'
@@ -125,8 +96,6 @@ function RequestsClearancesAddClearanceComponent({request, sims, agents, allAgen
                                          requestProcessing={requestLoading(allSimsRequests)}
                         />
                     </div>
-                </div>
-                <div className='row'>
                     <div className='col-sm-6'>
                         <AmountComponent input={amount}
                                          id='inputFleet'
@@ -146,12 +115,11 @@ function RequestsClearancesAddClearanceComponent({request, sims, agents, allAgen
 // Prop types to ensure destroyed props data type
 RequestsClearancesAddClearanceComponent.propTypes = {
     sims: PropTypes.array.isRequired,
-    agents: PropTypes.array.isRequired,
+    user: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
     request: PropTypes.object.isRequired,
     handleClose: PropTypes.func.isRequired,
     allSimsRequests: PropTypes.object.isRequired,
-    allAgentsRequests: PropTypes.object.isRequired,
 };
 
 export default React.memo(RequestsClearancesAddClearanceComponent);

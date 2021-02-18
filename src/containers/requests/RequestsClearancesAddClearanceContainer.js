@@ -4,11 +4,10 @@ import RequestsClearancesAddClearanceComponent from "../../components/requests/R
 
 // Map state function to component props
 const mapStateToProps = (state) => ({
+    user: state.user,
     sims: state.sims.list,
-    agents: state.agents.list,
     request: state.clearancesRequests.add,
     allSimsRequests: state.simsRequests.all,
-    allAgentsRequests: state.agentsRequests.all,
 });
 
 // Map dispatch function to component props
