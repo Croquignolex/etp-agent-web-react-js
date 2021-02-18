@@ -1,13 +1,10 @@
 import {all, call, fork, put, takeLatest} from 'redux-saga/effects'
 
 import * as api from "../../constants/apiConstants";
-import {SUPPLY_BY_AGENT} from "../../constants/typeConstants";
-import {apiGetRequest, apiPostRequest, getFileFromServer} from "../../functions/axiosFunctions";
+import {apiGetRequest, getFileFromServer} from "../../functions/axiosFunctions";
 import {
-    EMIT_ADD_REFUEL,
     EMIT_REFUELS_FETCH,
     storeSetRefuelsData,
-    storeSetNewRefuelData,
     storeSetNextRefuelsData,
     EMIT_NEXT_REFUELS_FETCH,
     storeStopInfiniteScrollRefuelData
@@ -15,11 +12,8 @@ import {
 import {
     storeRefuelsRequestInit,
     storeRefuelsRequestFailed,
-    storeAddRefuelRequestInit,
     storeRefuelsRequestSucceed,
-    storeAddRefuelRequestFailed,
     storeNextRefuelsRequestInit,
-    storeAddRefuelRequestSucceed,
     storeNextRefuelsRequestFailed,
     storeNextRefuelsRequestSucceed,
 } from "../requests/refuels/actions";
@@ -61,32 +55,6 @@ export function* emitNextRefuelsFetch() {
             // Fire event for request
             yield put(storeNextRefuelsRequestFailed({message}));
             yield put(storeStopInfiniteScrollRefuelData());
-        }
-    });
-}
-
-// Fleets new refuel from API
-export function* emitAddRefuel() {
-    yield takeLatest(EMIT_ADD_REFUEL, function*({agent, amount, sim, receipt}) {
-        try {
-            // Fire event for request
-            yield put(storeAddRefuelRequestInit());
-            const data = new FormData();
-            data.append('id_puce', sim);
-            data.append('recu', receipt);
-            data.append('id_agent', agent);
-            data.append('montant', amount);
-            data.append('type', SUPPLY_BY_AGENT);
-            const apiResponse = yield call(apiPostRequest, api.NEW_REFUEL_API_PATH, data);
-            // Extract dataF
-            const refuel = extractRefuelData(apiResponse.data);
-            // Fire event to redux
-            yield put(storeSetNewRefuelData({refuel}))
-            // Fire event for request
-            yield put(storeAddRefuelRequestSucceed({message: apiResponse.message}));
-        } catch (message) {
-            // Fire event for request
-            yield put(storeAddRefuelRequestFailed({message}));
         }
     });
 }
@@ -149,7 +117,6 @@ export function extractRefuelsData(apiRefuels) {
 // Combine to export all functions at once
 export default function* sagaRefuels() {
     yield all([
-        fork(emitAddRefuel),
         fork(emitRefuelsFetch),
         fork(emitNextRefuelsFetch),
     ]);

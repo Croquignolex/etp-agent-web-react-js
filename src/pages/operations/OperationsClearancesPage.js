@@ -19,7 +19,6 @@ import OperationsClearancesCardsComponent from "../../components/operations/Oper
 function OperationsClearancesPage({refuels, refuelsRequests, hasMoreData, page, dispatch, location}) {
     // Local states
     const [needle, setNeedle] = useState('');
-    const [refuelModal, setRefuelModal] = useState({show: false, header: 'EFFECTUER UN DESTOCKAGE'});
 
     // Local effects
     useEffect(() => {
@@ -48,11 +47,6 @@ function OperationsClearancesPage({refuels, refuelsRequests, hasMoreData, page, 
         dispatch(emitNextRefuelsFetch({page}));
     }
 
-    // Show refuel modal form
-    const handleRefuelModalShow = (item) => {
-        setRefuelModal({...refuelModal, item, show: true})
-    }
-
     // Render
     return (
         <>
@@ -74,12 +68,6 @@ function OperationsClearancesPage({refuels, refuelsRequests, hasMoreData, page, 
                                             {/* Error message */}
                                             {requestFailed(refuelsRequests.list) && <ErrorAlertComponent message={refuelsRequests.list.message} />}
                                             {requestFailed(refuelsRequests.next) && <ErrorAlertComponent message={refuelsRequests.next.message} />}
-                                            <button type="button"
-                                                    className="btn btn-theme mb-2"
-                                                    onClick={handleRefuelModalShow}
-                                            >
-                                                <i className="fa fa-plus" /> Effectuer un déstockage
-                                            </button>
                                             {/* Search result & Infinite scroll */}
                                             {(needle !== '' && needle !== undefined)
                                                 ? <OperationsClearancesCardsComponent refuels={searchEngine(refuels, needle)} />

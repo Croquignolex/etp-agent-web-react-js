@@ -31,14 +31,8 @@ export const ALL_CLEARANCES_API_PATH = `${API_URL}/list_demandes_destockage_all`
 export const All_SIMS_API_PATH = `${API_URL}/puce_list_all`;
 export const SIMS_API_PATH = `${API_URL}/puce_list_resource`;
 
-// Zones
-export const All_ZONES_API_PATH = `${API_URL}/zone_list_all`;
-
 // Collectors
 export const ALL_COLLECTORS_API_PATH = `${API_URL}/recouvreurs_all`;
-
-// Manager
-export const ALL_MANAGERS_API_PATH = `${API_URL}/gestionnaires_all`;
 
 // Operators
 export const All_OPERATORS_API_PATH = `${API_URL}/flote_list_all`;
@@ -47,20 +41,8 @@ export const All_OPERATORS_API_PATH = `${API_URL}/flote_list_all`;
 export const CASH_RECOVERIES_API_PATH = `${API_URL}/list_recouvrement_by_agent`;
 export const FLEET_RECOVERIES_API_PATH = `${API_URL}/list_retour_flotte_by_agent`;
 
-// Transfers
-export const TRANSFERS_API_PATH = `${API_URL}/list_all_flottage_interne`;
-export const NEW_TRANSFERS_API_PATH = `${API_URL}/flottage_interne_rz_gf`;
-
 // Supplies
-export const SUPPLIES_API_PATH = `${API_URL}/list_all_flottage`;
-
-// Network supplies
-export const NEW_NETWORK_SUPPLY_API_PATH = `${API_URL}/flottage_by_rz`;
-export const NETWORK_SUPPLIES_API_PATH = `${API_URL}/list_flottage_rz_by_rz`;
+export const SUPPLIES_API_PATH = `${API_URL}/list_all_flottage_agent`;
 
 // Refuels
-export const NEW_REFUEL_API_PATH = `${API_URL}/approvisionnement_etp`;
-export const REFUELS_API_PATH = `${API_URL}/list_destockage_collector`;
-
-// Affords
-export const AFFORDS_API_PATH = `${API_URL}/list_approvisionnement_collector`;
+export const REFUELS_API_PATH = `${API_URL}/list_destockage_agent`;

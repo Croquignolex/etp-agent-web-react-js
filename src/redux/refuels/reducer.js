@@ -23,10 +23,6 @@ function reduce(state = initialState, action) {
         case actions.STORE_STOP_INFINITE_SCROLL_REFUEL_DATA:
             nextState = {...state, hasMoreData: false};
             return nextState || state;
-        // Resolve event to set new refuel data
-        case actions.STORE_SET_NEW_REFUEL_DATA:
-            nextState = {...state, list: [action.refuel, ...state.list]}
-            return nextState || state;
         // Unknown action
         default: return state;
     }

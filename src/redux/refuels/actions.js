@@ -1,11 +1,9 @@
 // Reducer action types
 export const STORE_SET_REFUELS_DATA = 'STORE_SET_REFUELS_DATA';
-export const STORE_SET_NEW_REFUEL_DATA = 'STORE_SET_NEW_REFUEL_DATA';
 export const STORE_SET_NEXT_REFUELS_DATA = 'STORE_SET_NEXT_REFUELS_DATA';
 export const STORE_STOP_INFINITE_SCROLL_REFUEL_DATA = 'STORE_STOP_INFINITE_SCROLL_REFUEL_DATA';
 
 // Middleware action types
-export const EMIT_ADD_REFUEL = 'EMIT_ADD_REFUEL';
 export const EMIT_REFUELS_FETCH = 'EMIT_REFUELS_FETCH';
 export const EMIT_NEXT_REFUELS_FETCH = 'EMIT_NEXT_REFUELS_FETCH';
 
@@ -16,12 +14,6 @@ export const storeSetRefuelsData = ({refuels, hasMoreData, page}) => ({
     refuels,
     hasMoreData,
     type: STORE_SET_REFUELS_DATA
-});
-
-// Set new refuel data in store
-export const storeSetNewRefuelData = ({refuel}) => ({
-    refuel,
-    type: STORE_SET_NEW_REFUEL_DATA
 });
 
 // Set next refuels data in store
@@ -47,13 +39,4 @@ export const emitRefuelsFetch = () => ({
 export const emitNextRefuelsFetch = ({page}) => ({
     page,
     type: EMIT_NEXT_REFUELS_FETCH
-});
-
-// Emit add refuel
-export const emitAddRefuel = ({agent, amount, sim, receipt}) => ({
-    sim,
-    agent,
-    amount,
-    receipt,
-    type: EMIT_ADD_REFUEL
 });
