@@ -1,6 +1,6 @@
+export const USER_ROLE = "AGENT";
 export const AGENT_SCOPE = "AGENT_SCOPE";
 export const PROFILE_SCOPE = "PROFILE_SCOPE";
-export const USER_ROLE = "RESPONSABLE DE ZONNE";
 
 export const DEFAULT_GUEST_MESSAGE = "Request failed with status code 401";
 
