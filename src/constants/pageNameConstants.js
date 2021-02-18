@@ -14,7 +14,7 @@ export const AGENTS = 'Agents/Resources';
 
 // Operations
 export const OPERATIONS = 'Opérations';
-export const OPERATIONS_FLEETS_PAGE = 'Flottages Agent';
+export const OPERATIONS_FLEETS_PAGE = 'Flottages';
 export const OPERATIONS_CLEARANCES_PAGE = 'Déstockages';
 export const OPERATIONS_ANONYMOUS_FLEETS_PAGE = 'Flottages Anonyme';
 
