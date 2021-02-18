@@ -7,7 +7,6 @@ import {emitAllSimsFetch} from "../redux/sims/actions";
 import * as setting from "../constants/settingsConstants";
 import {emitAllFleetsFetch} from "../redux/fleets/actions";
 import {emitFetchUserBalance} from "../redux/user/actions";
-import {emitAllAgentsFetch} from "../redux/agents/actions";
 import HeaderComponent from "../components/HeaderComponent";
 import {DASHBOARD_PAGE} from "../constants/pageNameConstants";
 import AppLayoutContainer from "../containers/AppLayoutContainer";
@@ -15,7 +14,6 @@ import {emitAllClearancesFetch} from "../redux/clearances/actions";
 import {storeAllSimsRequestReset} from "../redux/requests/sims/actions";
 import {formatNumber, requestLoading} from "../functions/generalFunctions";
 import {storeAllFleetsRequestReset} from "../redux/requests/fleets/actions";
-import {storeAllAgentsRequestReset} from "../redux/requests/agents/actions";
 import {storeUserBalanceFetchRequestReset} from "../redux/requests/user/actions";
 import DashboardCardComponent from "../components/dashboard/DashboardCardComponent";
 import {storeAllClearancesRequestReset} from "../redux/requests/clearances/actions";
@@ -26,7 +24,6 @@ function DashboardPage({user, fleets, sims, clearances, agents, settings, dispat
     // Local effects
     useEffect(() => {
         dispatch(emitAllSimsFetch());
-        dispatch(emitAllAgentsFetch());
         dispatch(emitAllFleetsFetch());
         dispatch(emitFetchUserBalance());
         dispatch(emitAllClearancesFetch());
@@ -41,7 +38,6 @@ function DashboardPage({user, fleets, sims, clearances, agents, settings, dispat
     const shouldResetErrorData = () => {
         dispatch(storeAllSimsRequestReset());
         dispatch(storeAllFleetsRequestReset());
-        dispatch(storeAllAgentsRequestReset());
         dispatch(storeAllClearancesRequestReset());
         dispatch(storeUserBalanceFetchRequestReset());
     };
