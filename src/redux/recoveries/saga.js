@@ -1,10 +1,8 @@
 import { all, takeLatest, put, fork, call } from 'redux-saga/effects'
 
 import * as api from "../../constants/apiConstants";
-import {storeUpdateSupplyData} from "../supplies/actions";
-import {apiGetRequest, apiPostRequest, getFileFromServer} from "../../functions/axiosFunctions";
+import {apiGetRequest, getFileFromServer} from "../../functions/axiosFunctions";
 import {
-    EMIT_NEW_RECOVERY,
     EMIT_RECOVERIES_FETCH,
     storeSetRecoveriesData,
     EMIT_NEXT_RECOVERIES_FETCH,
@@ -12,9 +10,6 @@ import {
     storeStopInfiniteScrollRecoveryData
 } from "./actions";
 import {
-    storeRecoverRequestInit,
-    storeRecoverRequestFailed,
-    storeRecoverRequestSucceed,
     storeRecoveriesRequestInit,
     storeRecoveriesRequestFailed,
     storeRecoveriesRequestSucceed,

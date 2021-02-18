@@ -24,12 +24,6 @@ function RecoveriesCashCardsComponent({recoveries}) {
                                             <b>Créer le</b>
                                             <span className="float-right">{dateToString(item.creation)}</span>
                                         </li>
-                                        <li className="list-group-item">
-                                            <b>Agent/Ressource</b>
-                                            <span className="float-right">
-                                                {item.agent.name}
-                                            </span>
-                                        </li>
                                         {item.receipt && (
                                             <li className="list-group-item text-center">
                                                 <a download target='_blank' href={item.receipt} rel='noopener noreferrer' className="btn btn-theme">
