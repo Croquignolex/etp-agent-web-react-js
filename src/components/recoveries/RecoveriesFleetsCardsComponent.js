@@ -35,12 +35,6 @@ function RecoveriesFleetsCardsComponent({returns}) {
                                             <b>Puce de flottage</b>
                                             <span className="float-right">{item.sim_incoming.number}</span>
                                         </li>
-                                        <li className="list-group-item">
-                                            <b>Agent/Ressource</b>
-                                            <span className="float-right">
-                                                {item.agent.name}
-                                            </span>
-                                        </li>
                                     </ul>
                                 </div>
                             </div>
