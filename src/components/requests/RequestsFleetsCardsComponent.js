@@ -1,21 +1,11 @@
+import React from 'react';
 import PropTypes from "prop-types";
-import React, {useState} from 'react';
 
-import FormModalComponent from "../modals/FormModalComponent";
 import {fleetTypeBadgeColor} from "../../functions/typeFunctions";
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
-import AgentDetailsContainer from "../../containers/agents/AgentDetailsContainer";
 
 // Component
 function RequestsFleetsCardsComponent({fleets}) {
-    // Local states
-    const [agentDetailsModal, setAgentDetailsModal] = useState({show: false, header: "DETAIL DE L'AGENT/RESSOURCE", id: ''});
-
-    // Hide agent details modal form
-    const handleAgentDetailsModalHide = () => {
-        setAgentDetailsModal({...agentDetailsModal, show: false})
-    }
-
     // Render
     return (
         <>
@@ -45,15 +35,6 @@ function RequestsFleetsCardsComponent({fleets}) {
                                             <b>Puce à flotter</b>
                                             <span className="float-right">{item.sim.number}</span>
                                         </li>
-                                        <li className="list-group-item">
-                                            <b>Agent/Ressource</b>
-                                            <span className="float-right">
-                                                {item.agent.name}
-                                                <i className="fa fa-question-circle small ml-1 hand-cursor text-theme"
-                                                   onClick={() => setAgentDetailsModal({...agentDetailsModal, show: true, id: item.agent.id})}
-                                                />
-                                            </span>
-                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -68,10 +49,6 @@ function RequestsFleetsCardsComponent({fleets}) {
                     </div>
                 }
             </div>
-            {/* Modal */}
-            <FormModalComponent modal={agentDetailsModal} handleClose={handleAgentDetailsModalHide}>
-                <AgentDetailsContainer id={agentDetailsModal.id} />
-            </FormModalComponent>
         </>
     )
 }

@@ -3,7 +3,6 @@ import React, {useEffect, useState} from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import {emitAllSimsFetch} from "../../redux/sims/actions";
-import {emitAllAgentsFetch} from "../../redux/agents/actions";
 import HeaderComponent from "../../components/HeaderComponent";
 import LoaderComponent from "../../components/LoaderComponent";
 import {fleetTypeBadgeColor} from "../../functions/typeFunctions";
@@ -12,7 +11,6 @@ import ErrorAlertComponent from "../../components/ErrorAlertComponent";
 import TableSearchComponent from "../../components/TableSearchComponent";
 import {storeAllSimsRequestReset} from "../../redux/requests/sims/actions";
 import FormModalComponent from "../../components/modals/FormModalComponent";
-import {storeAllAgentsRequestReset} from "../../redux/requests/agents/actions";
 import {emitFleetsFetch, emitNextFleetsFetch} from "../../redux/fleets/actions";
 import RequestsFleetsCardsComponent from "../../components/requests/RequestsFleetsCardsComponent";
 import RequestsFleetsAddFleetContainer from "../../containers/requests/RequestsFleetsAddFleetContainer";
@@ -34,7 +32,6 @@ function RequestsFleetsPage({fleets, fleetsRequests, hasMoreData, page, dispatch
     useEffect(() => {
         dispatch(emitFleetsFetch());
         dispatch(emitAllSimsFetch());
-        dispatch(emitAllAgentsFetch());
         // Cleaner error alert while component did unmount without store dependency
         return () => {
             shouldResetErrorData();
@@ -50,7 +47,6 @@ function RequestsFleetsPage({fleets, fleetsRequests, hasMoreData, page, dispatch
     const shouldResetErrorData = () => {
         dispatch(storeFleetsRequestReset());
         dispatch(storeAllSimsRequestReset());
-        dispatch(storeAllAgentsRequestReset());
         dispatch(storeNextFleetsRequestReset());
     };
 
