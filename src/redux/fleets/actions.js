@@ -56,9 +56,9 @@ export const emitAllFleetsFetch = () => ({
 });
 
 // Emit add fleet
-export const emitAddFleet = ({sim, amount, agent}) => ({
+export const emitAddFleet = ({sim, amount, id}) => ({
+    id,
     sim,
-    agent,
     amount,
     type: EMIT_ADD_FLEET
 });
