@@ -17,7 +17,6 @@ export const OPERATIONS = 'Opérations';
 export const OPERATIONS_FLEETS_PAGE = 'Flottages Agent';
 export const OPERATIONS_CLEARANCES_PAGE = 'Déstockages';
 export const OPERATIONS_AFFORDS_PAGE = 'Approvisionnements';
-export const OPERATIONS_TRANSFERS_PAGE = 'Tranferts de flotte';
 export const OPERATIONS_ANONYMOUS_FLEETS_PAGE = 'Flottages Anonyme';
 
 // Recoveries

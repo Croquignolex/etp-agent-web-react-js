@@ -9,7 +9,6 @@ import settings from './settings/reducer';
 import managers from './managers/reducer';
 import supplies from './supplies/reducer';
 import operators from './operators/reducer';
-import transfers from './transfers/reducer';
 import recoveries from './recoveries/reducer';
 import clearances from './clearances/reducer';
 import collectors from './collectors/reducer';
@@ -26,7 +25,6 @@ import settingsRequests from './requests/settings/reducer';
 import managersRequests from './requests/managers/reducer';
 import suppliesRequests from './requests/supplies/reducer';
 import operatorsRequests from './requests/operators/reducer';
-import transfersRequests from './requests/transfers/reducer';
 import collectorsRequests from './requests/collectors/reducer';
 import clearancesRequests from './requests/clearances/reducer';
 import recoveriesRequests from './requests/recoveries/reducer';
@@ -46,7 +44,6 @@ export default {
     managers,
     supplies,
     operators,
-    transfers,
     recoveries,
     clearances,
     collectors,
@@ -62,7 +59,6 @@ export default {
     suppliesRequests,
     managersRequests,
     settingsRequests,
-    transfersRequests,
     operatorsRequests,
     recoveriesRequests,
     clearancesRequests,
