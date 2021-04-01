@@ -8,3 +8,5 @@ export const DEFAULT_ARRAY_FORM_DATA = {isValid: true, errorMessage: '', data: [
 export const DEFAULT_OBJECT_FORM_DATA = {isValid: true, errorMessage: '', data: {}};
 
 export const UNKNOWN = 'INCONNU';
+
+export const CURRENCY = ' xaf';
