@@ -85,7 +85,7 @@ function RequestsClearancesPage({clearances, clearancesRequests, hasMoreData, pa
                                                     className="btn btn-theme mb-2"
                                                     onClick={handleClearanceModalShow}
                                             >
-                                                <i className="fa fa-plus" /> Demande de déstockage
+                                                <i className="fa fa-plus" /> Passer une demande de déstockage
                                             </button>
                                             {/* Search result & Infinite scroll */}
                                             {(needle !== '' && needle !== undefined)

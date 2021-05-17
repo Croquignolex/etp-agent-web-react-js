@@ -16,11 +16,11 @@ function SideBarComponent({user, pathname}) {
     const {name, avatar} = user;
     const authorisedMenu = useMemo(() => {
         return [
-            buildDashboardMenu(),
+            // buildDashboardMenu(),
             buildRequestsMenu(),
-            buildOperationsMenu(),
-            buildRecoveriesMenu(),
-            buildSimsMenu(),
+            // buildOperationsMenu(),
+            // buildRecoveriesMenu(),
+            // buildSimsMenu(),
         ];
         // eslint-disable-next-line
     }, [pathname]);

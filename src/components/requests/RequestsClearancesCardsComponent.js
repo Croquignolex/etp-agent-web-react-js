@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import PropTypes from "prop-types";
 
+import OperatorComponent from "../OperatorComponent";
 import FormModalComponent from "../modals/FormModalComponent";
 import {fleetTypeBadgeColor} from "../../functions/typeFunctions";
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
@@ -28,6 +29,7 @@ function RequestsClearancesCardsComponent({clearances}) {
                                     <h3 className="card-title">{fleetTypeBadgeColor(item.status).text}</h3>
                                 </div>
                                 <div className="card-body">
+                                    <OperatorComponent operator={item.operator} />
                                     <ul className="list-group list-group-unbordered">
                                         <li className="list-group-item">
                                             <b>Créer le</b>
@@ -35,11 +37,15 @@ function RequestsClearancesCardsComponent({clearances}) {
                                         </li>
                                         <li className="list-group-item">
                                             <b>Montant demandé</b>
-                                            <span className="float-right">{formatNumber(item.amount)}</span>
+                                            <span className="float-right text-success text-bold">
+                                                {formatNumber(item.amount)}
+                                            </span>
                                         </li>
                                         <li className="list-group-item">
                                             <b>Reste à accepter</b>
-                                            <span className="float-right text-danger text-bold">{formatNumber(item.remaining)}</span>
+                                            <span className="float-right text-danger text-bold">
+                                                {formatNumber(item.remaining)}
+                                            </span>
                                         </li>
                                         <li className="list-group-item">
                                             <b>Puce à déstocker</b>
