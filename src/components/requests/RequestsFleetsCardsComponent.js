@@ -37,12 +37,14 @@ function RequestsFleetsCardsComponent({fleets}) {
                                         {(item.status !== DONE) ? (
                                             <li className="list-group-item">
                                                 <b>Flotte démandée</b>
-                                                <span className="float-right text-danger text-bold">{formatNumber(item.amount)}</span>
+                                                <span className="float-right">{formatNumber(item.amount)}</span>
                                             </li>
                                         ) : (
                                             <li className="list-group-item">
                                                 <b>Flotte servie</b>
-                                                <span className="float-right">{formatNumber(item.amount)}</span>
+                                                <span className="float-right text-danger text-bold">
+                                                    {formatNumber(parseInt(item.amount) - parseInt(item.remaining))}
+                                                </span>
                                             </li>
                                         )}
                                         <li className="list-group-item">
