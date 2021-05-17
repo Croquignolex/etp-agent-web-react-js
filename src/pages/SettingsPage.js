@@ -18,6 +18,7 @@ import {storeSettingsRequestReset} from "../redux/requests/settings/actions";
 import {DEFAULT_ARRAY_FORM_DATA, DEFAULT_FORM_DATA} from "../constants/defaultConstants";
 import {applySuccess, requestFailed, requestLoading, requestSucceeded} from "../functions/generalFunctions";
 
+
 // Component
 function SettingsPage({settings, request, dispatch, location}) {
     // Local state
@@ -52,9 +53,10 @@ function SettingsPage({settings, request, dispatch, location}) {
                 // {value: 0, label: 'name'}
             ],
             cards: [
-                {value: setting.CARD_FLEETS_REQUESTS, label: setting.LABEL_FLEETS_REQUESTS},
-                {value: setting.CARD_ACCOUNTS_BALANCE, label: setting.LABEL_ACCOUNTS_BALANCE},
-                {value: setting.CARD_CLEARANCES_REQUEST, label: setting.LABEL_CLEARANCES_REQUEST}
+                {value: setting.CARD_FLEETS_REQUESTS_MTN, label: setting.LABEL_FLEETS_REQUESTS_MTN},
+                {value: setting.CARD_CLEARANCES_REQUEST_MTN, label: setting.LABEL_CLEARANCES_REQUEST_MTN},
+                {value: setting.CARD_FLEETS_REQUESTS_ORANGE, label: setting.LABEL_FLEETS_REQUESTS_ORANGE},
+                {value: setting.CARD_CLEARANCES_REQUEST_ORANGE, label: setting.LABEL_CLEARANCES_REQUEST_ORANGE},
             ],
             charts: [
                 // {value: 0, label: 'name'}

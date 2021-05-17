@@ -9,4 +9,4 @@ export const DEFAULT_OBJECT_FORM_DATA = {isValid: true, errorMessage: '', data: 
 
 export const UNKNOWN = 'INCONNU';
 
-export const CURRENCY = ' xaf';
+export const CURRENCY = ' fcfa';

@@ -3,22 +3,27 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
 import LoaderComponent from "../LoaderComponent";
+import OperatorComponent from "../OperatorComponent";
 import ErrorAlertComponent from "../ErrorAlertComponent";
 import {requestFailed, requestLoading} from "../../functions/generalFunctions";
 
 // Component
-function DashboardCardComponent({request, icon, label, color, data, url}) {
+function DashboardCardComponent({request, operator, label, color, data, url}) {
     // Render
     return (
         <>
             {requestLoading(request)  ? <div className='small-box'><LoaderComponent /></div> : (
-                requestFailed(request) ? <ErrorAlertComponent message={request.message} /> : (
+                requestFailed(request) ? <ErrorAlertComponent message={rsequest.message} /> : (
                     <div className={`small-box ${color}`}>
                         <div className="inner">
-                            <h3>{data}</h3>
-                            <p>{label}</p>
+                            <h4 className="text-right">
+                                <div className="float-left">
+                                    <OperatorComponent operator={operator} />
+                                </div>
+                                {data}
+                            </h4>
+                            <span>{label}</span>
                         </div>
-                        <div className="icon"><i className={icon} /></div>
                         <Link to={url} className="small-box-footer">
                             Détails <i className="fas fa-arrow-circle-right" />
                         </Link>
@@ -32,7 +37,6 @@ function DashboardCardComponent({request, icon, label, color, data, url}) {
 // Prop types to ensure destroyed props data type
 DashboardCardComponent.propTypes = {
     url: PropTypes.string.isRequired,
-    icon: PropTypes.string.isRequired,
     data: PropTypes.oneOfType([
         PropTypes.number.isRequired,
         PropTypes.string.isRequired,
@@ -40,6 +44,7 @@ DashboardCardComponent.propTypes = {
     color: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     request: PropTypes.object.isRequired,
+    operator: PropTypes.object.isRequired,
 };
 
 export default React.memo(DashboardCardComponent);
