@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from "prop-types";
 
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
+import OperatorComponent from "../OperatorComponent";
 
 // Component
 function SimCardComponent({sim}) {
     // Render
     return (
-        <div>
+        <>
+            <OperatorComponent operator={sim.operator} />
             <ul className="list-group list-group-unbordered">
                 <li className="list-group-item">
                     <b>Créer le</b>
@@ -25,12 +27,8 @@ function SimCardComponent({sim}) {
                     <b>Solde flotte</b>
                     <span className="float-right text-success text-bold">{formatNumber(sim.balance)}</span>
                 </li>
-                <li className="list-group-item">
-                    <b>Opérateur</b>
-                    <span className="float-right">{sim.operator.name}</span>
-                </li>
             </ul>
-        </div>
+        </>
     )
 }
 
