@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import FormModalComponent from "../modals/FormModalComponent";
 import {fleetTypeBadgeColor} from "../../functions/typeFunctions";
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
+import SimDetailsContainer from "../../containers/sims/SimDetailsContainer";
 
 // Component
 function RequestsFleetsCardsComponent({fleets}) {
