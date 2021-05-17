@@ -43,6 +43,10 @@ function DashboardPage({fleets, clearances, settings, dispatch,
         return fleets.filter(fleet => fleet.status === PENDING).length
         // eslint-disable-next-line
     }, [fleets]);
+    const clearancesData = useMemo(() => {
+        return clearances.filter(clearance => clearance.status === PENDING).length
+        // eslint-disable-next-line
+    }, [clearances]);
 
     // Render
     return (
@@ -66,8 +70,8 @@ function DashboardPage({fleets, clearances, settings, dispatch,
                             {cardsData.includes(setting.CARD_CLEARANCES_REQUEST) &&
                                 <div className="col-lg-3 col-md-4 col-sm-6">
                                     <DashboardCardComponent color='bg-warning'
+                                                            data={clearancesData}
                                                             icon='fa fa-rss-square'
-                                                            data={clearances.length}
                                                             request={allClearancesRequests}
                                                             url={path.REQUESTS_CLEARANCES_PAGE_PATH}
                                                             label={setting.LABEL_CLEARANCES_REQUEST}
