@@ -14,6 +14,11 @@ export const STORE_ALL_SIMS_REQUEST_RESET = 'STORE_ALL_SIMS_REQUEST_RESET';
 export const STORE_ALL_SIMS_REQUEST_FAILED = 'STORE_ALL_SIMS_REQUEST_FAILED';
 export const STORE_ALL_SIMS_REQUEST_SUCCEEDED = 'STORE_ALL_SIMS_REQUEST_SUCCEEDED';
 
+export const STORE_SHOW_SIM_REQUEST_INIT = 'STORE_SHOW_SIM_REQUEST_INIT';
+export const STORE_SHOW_SIM_REQUEST_RESET = 'STORE_SHOW_SIM_REQUEST_RESET';
+export const STORE_SHOW_SIM_REQUEST_FAILED = 'STORE_SHOW_SIM_REQUEST_FAILED';
+export const STORE_SHOW_SIM_REQUEST_SUCCEEDED = 'STORE_SHOW_SIM_REQUEST_SUCCEEDED';
+
 // ======================================================== Sims
 // Set sims init data into store
 export const storeSimsRequestInit = () => ({
@@ -79,4 +84,26 @@ export const storeAllSimsRequestSucceed = ({message}) => ({
 // Set all sims reset data into store
 export const storeAllSimsRequestReset = () => ({
     type: STORE_ALL_SIMS_REQUEST_RESET
+});
+// ======================================================== Show sim
+// Set show sim init data into store
+export const storeShowSimRequestInit = () => ({
+    type: STORE_SHOW_SIM_REQUEST_INIT
+});
+
+// Set show sim failed data into store
+export const storeShowSimRequestFailed = ({message}) => ({
+    message,
+    type: STORE_SHOW_SIM_REQUEST_FAILED
+});
+
+// Set show sim succeeded data into store
+export const storeShowSimRequestSucceed = ({message}) => ({
+    message,
+    type: STORE_SHOW_SIM_REQUEST_SUCCEEDED
+});
+
+// Set show sim reset data into store
+export const storeShowSimRequestReset = () => ({
+    type: STORE_SHOW_SIM_REQUEST_RESET
 });

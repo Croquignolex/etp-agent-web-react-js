@@ -28,6 +28,7 @@ export const CLEARANCES_API_PATH = `${API_URL}/list_all_demandes_destockage`;
 export const ALL_CLEARANCES_API_PATH = `${API_URL}/list_all_demandes_destockage_all`;
 
 // Sims
+export const SIM_API_PATH = `${API_URL}/store_puce`;
 export const All_SIMS_API_PATH = `${API_URL}/puce_list_all`;
 export const SIMS_API_PATH = `${API_URL}/puce_list_resource`;
 
