@@ -5,6 +5,7 @@ import FormModalComponent from "../modals/FormModalComponent";
 import {fleetTypeBadgeColor} from "../../functions/typeFunctions";
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
 import SimDetailsContainer from "../../containers/sims/SimDetailsContainer";
+import {DONE} from "../../constants/typeConstants";
 
 // Component
 function RequestsFleetsCardsComponent({fleets}) {
@@ -33,14 +34,17 @@ function RequestsFleetsCardsComponent({fleets}) {
                                             <b>Créer le</b>
                                             <span className="float-right">{dateToString(item.creation)}</span>
                                         </li>
-                                        <li className="list-group-item">
-                                            <b>Montant demandé</b>
-                                            <span className="float-right">{formatNumber(item.amount)}</span>
-                                        </li>
-                                        <li className="list-group-item">
-                                            <b>Reste à flotter</b>
-                                            <span className="float-right text-danger text-bold">{formatNumber(item.remaining)}</span>
-                                        </li>
+                                        {(item.status !== DONE) ? (
+                                            <li className="list-group-item">
+                                                <b>Flotte démandée</b>
+                                                <span className="float-right text-danger text-bold">{formatNumber(item.amount)}</span>
+                                            </li>
+                                        ) : (
+                                            <li className="list-group-item">
+                                                <b>Flotte servie</b>
+                                                <span className="float-right">{formatNumber(item.amount)}</span>
+                                            </li>
+                                        )}
                                         <li className="list-group-item">
                                             <b>Puce à flotter</b>
                                             <span className="float-right">

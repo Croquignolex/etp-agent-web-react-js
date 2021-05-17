@@ -5,6 +5,7 @@ import {DONE} from "../../constants/typeConstants";
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
 import FormModalComponent from "../modals/FormModalComponent";
 import SimDetailsContainer from "../../containers/sims/SimDetailsContainer";
+import {fleetTypeBadgeColor} from "../../functions/typeFunctions";
 
 // Component
 function OperationsFleetsCardsComponent({supplies}) {
@@ -24,10 +25,8 @@ function OperationsFleetsCardsComponent({supplies}) {
                     return (
                         <div className="col-lg-4 col-md-6" key={key}>
                             <div className="card">
-                                <div className={`card-header ${item.status === DONE ? 'bg-secondary' : 'bg-primary'}`}>
-                                    <h3 className="card-title text-bold">
-                                        <i className="fa fa-phone" /> {formatNumber(item.amount)}
-                                    </h3>
+                                <div className={`${fleetTypeBadgeColor(item.status).background} card-header`}>
+                                    <h3 className="card-title">{fleetTypeBadgeColor(item.status).text}</h3>
                                 </div>
                                 <div className="card-body">
                                     <ul className="list-group list-group-unbordered">
@@ -47,6 +46,10 @@ function OperationsFleetsCardsComponent({supplies}) {
                                                    onClick={() => setSimDetailsModal({...simDetailsModal, show: true, id: item.sim_incoming.id})}
                                                 />
                                             </span>
+                                        </li>
+                                        <li className="list-group-item">
+                                            <b>Montant flotté</b>
+                                            <span className="float-right">{formatNumber(item.amount)}</span>
                                         </li>
                                         <li className="list-group-item">
                                             <b>Reste récouvrir</b>
