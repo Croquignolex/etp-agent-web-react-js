@@ -1,11 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from "prop-types";
 
 import {DONE} from "../../constants/typeConstants";
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
+import FormModalComponent from "../modals/FormModalComponent";
+import SimDetailsContainer from "../../containers/sims/SimDetailsContainer";
 
 // Component
 function OperationsFleetsCardsComponent({supplies}) {
+    // Local states
+    const [simDetailsModal, setSimDetailsModal] = useState({show: false, header: "DETAIL DE LA PUCE", id: ''});
+
+    // Hide sim details modal form
+    const handleSimDetailsModalHide = () => {
+        setSimDetailsModal({...simDetailsModal, show: false})
+    }
+
     // Render
     return (
         <>
@@ -31,7 +41,12 @@ function OperationsFleetsCardsComponent({supplies}) {
                                         </li>
                                         <li className="list-group-item">
                                             <b>Puce receptrice</b>
-                                            <span className="float-right">{item.sim_incoming.number}</span>
+                                            <span className="float-right">
+                                                {item.sim_incoming.number}
+                                                <i className="fa fa-question-circle small ml-1 hand-cursor text-theme"
+                                                   onClick={() => setSimDetailsModal({...simDetailsModal, show: true, id: item.sim_incoming.id})}
+                                                />
+                                            </span>
                                         </li>
                                         <li className="list-group-item">
                                             <b>Reste récouvrir</b>
@@ -55,6 +70,10 @@ function OperationsFleetsCardsComponent({supplies}) {
                     </div>
                 }
             </div>
+            {/* Modal */}
+            <FormModalComponent small={true} modal={simDetailsModal} handleClose={handleSimDetailsModalHide}>
+                <SimDetailsContainer id={simDetailsModal.id} />
+            </FormModalComponent>
         </>
     )
 }
