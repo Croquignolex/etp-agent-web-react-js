@@ -30,6 +30,10 @@ function OperationsClearancesCardsComponent({refuels}) {
                                             <span className="float-right">{item.sim.number}</span>
                                         </li>
                                         <li className="list-group-item">
+                                            <b>Responsable</b>
+                                            <span className="float-right">{item.collector.name}</span>
+                                        </li>
+                                        <li className="list-group-item">
                                             {(item.status === DONE)
                                                 ? <b className="text-success">Confirmé</b>
                                                 : <b className="text-danger">En attente de confirmation</b>
