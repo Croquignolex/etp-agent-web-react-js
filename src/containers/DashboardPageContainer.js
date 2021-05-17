@@ -8,12 +8,10 @@ setPageTitle(DASHBOARD_PAGE);
 
 // Map state function to component props
 const mapStateToProps = (state) => ({
-    user: state.user,
     settings: state.settings,
     fleets: state.fleets.list,
     clearances: state.clearances.list,
     allFleetsRequests: state.fleetsRequests.all,
-    balanceUserRequests: state.userRequests.balance,
     allClearancesRequests: state.clearancesRequests.all,
 });
 
