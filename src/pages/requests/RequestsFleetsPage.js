@@ -65,7 +65,7 @@ function RequestsFleetsPage({fleets, fleetsRequests, hasMoreData, page, dispatch
         <>
             <AppLayoutContainer pathname={location.pathname}>
                 <div className="content-wrapper">
-                    <HeaderComponent title="Demandes de flottes" icon={'fa fa-rss'} />
+                    <HeaderComponent title="Mes demandes de flottes" icon={'fa fa-rss'} />
                     <section className="content">
                         <div className='container-fluid'>
                             <div className="row">
@@ -85,7 +85,7 @@ function RequestsFleetsPage({fleets, fleetsRequests, hasMoreData, page, dispatch
                                                     className="btn btn-theme mb-2"
                                                     onClick={handleFleetModalShow}
                                             >
-                                                <i className="fa fa-plus" /> Nouvelle demande de flotte
+                                                <i className="fa fa-plus" /> Passer une demande de flotte
                                             </button>
                                             {/* Search result & Infinite scroll */}
                                             {(needle !== '' && needle !== undefined)

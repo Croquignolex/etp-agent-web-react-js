@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import PropTypes from "prop-types";
 
+import {DONE} from "../../constants/typeConstants";
+import OperatorComponent from "../OperatorComponent";
 import FormModalComponent from "../modals/FormModalComponent";
 import {fleetTypeBadgeColor} from "../../functions/typeFunctions";
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
 import SimDetailsContainer from "../../containers/sims/SimDetailsContainer";
-import {DONE} from "../../constants/typeConstants";
 
 // Component
 function RequestsFleetsCardsComponent({fleets}) {
@@ -30,6 +31,7 @@ function RequestsFleetsCardsComponent({fleets}) {
                                 </div>
                                 <div className="card-body">
                                     <ul className="list-group list-group-unbordered">
+                                        <OperatorComponent operator={item.operator} />
                                         <li className="list-group-item">
                                             <b>Créer le</b>
                                             <span className="float-right">{dateToString(item.creation)}</span>
@@ -37,7 +39,9 @@ function RequestsFleetsCardsComponent({fleets}) {
                                         {(item.status !== DONE) ? (
                                             <li className="list-group-item">
                                                 <b>Flotte démandée</b>
-                                                <span className="float-right">{formatNumber(item.amount)}</span>
+                                                <span className="float-right text-success text-bold">
+                                                    {formatNumber(item.amount)}
+                                                </span>
                                             </li>
                                         ) : (
                                             <li className="list-group-item">

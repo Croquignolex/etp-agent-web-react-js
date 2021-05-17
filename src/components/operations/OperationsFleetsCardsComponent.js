@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 import PropTypes from "prop-types";
 
-import {DONE} from "../../constants/typeConstants";
-import {dateToString, formatNumber} from "../../functions/generalFunctions";
 import FormModalComponent from "../modals/FormModalComponent";
-import SimDetailsContainer from "../../containers/sims/SimDetailsContainer";
 import {fleetTypeBadgeColor} from "../../functions/typeFunctions";
+import {dateToString, formatNumber} from "../../functions/generalFunctions";
+import SimDetailsContainer from "../../containers/sims/SimDetailsContainer";
 
 // Component
 function OperationsFleetsCardsComponent({supplies}) {
