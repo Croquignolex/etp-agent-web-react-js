@@ -13,7 +13,7 @@ function DashboardCardComponent({request, operator, label, color, data, url}) {
     return (
         <>
             {requestLoading(request)  ? <div className='small-box'><LoaderComponent /></div> : (
-                requestFailed(request) ? <ErrorAlertComponent message={rsequest.message} /> : (
+                requestFailed(request) ? <ErrorAlertComponent message={request.message} /> : (
                     <div className={`small-box ${color}`}>
                         <div className="inner">
                             <h4 className="text-right">
