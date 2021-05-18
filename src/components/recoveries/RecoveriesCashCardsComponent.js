@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from "prop-types";
 
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
-import {fleetTypeBadgeColor} from "../../functions/typeFunctions";
 
 // Component
 function RecoveriesCashCardsComponent({recoveries}) {

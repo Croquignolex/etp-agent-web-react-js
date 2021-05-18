@@ -9,7 +9,6 @@ import AppLayoutContainer from "../../containers/AppLayoutContainer";
 import ErrorAlertComponent from "../../components/ErrorAlertComponent";
 import TableSearchComponent from "../../components/TableSearchComponent";
 import {storeAllSimsRequestReset} from "../../redux/requests/sims/actions";
-import {OPERATIONS_CLEARANCES_PAGE} from "../../constants/pageNameConstants";
 import {emitNextRefuelsFetch, emitRefuelsFetch} from "../../redux/refuels/actions";
 import {dateToString, needleSearch, requestFailed, requestLoading} from "../../functions/generalFunctions";
 import {storeRefuelsRequestReset, storeNextRefuelsRequestReset} from "../../redux/requests/refuels/actions";

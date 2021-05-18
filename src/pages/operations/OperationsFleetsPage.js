@@ -7,7 +7,6 @@ import HeaderComponent from "../../components/HeaderComponent";
 import LoaderComponent from "../../components/LoaderComponent";
 import AppLayoutContainer from "../../containers/AppLayoutContainer";
 import ErrorAlertComponent from "../../components/ErrorAlertComponent";
-import {OPERATIONS_FLEETS_PAGE} from "../../constants/pageNameConstants";
 import TableSearchComponent from "../../components/TableSearchComponent";
 import {storeAllSimsRequestReset} from "../../redux/requests/sims/actions";
 import {emitNextSuppliesFetch, emitSuppliesFetch} from "../../redux/supplies/actions";
