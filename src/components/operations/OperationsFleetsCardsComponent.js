@@ -5,6 +5,8 @@ import FormModalComponent from "../modals/FormModalComponent";
 import {fleetTypeBadgeColor} from "../../functions/typeFunctions";
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
 import SimDetailsContainer from "../../containers/sims/SimDetailsContainer";
+import {DONE, PENDING, PROCESSING} from "../../constants/typeConstants";
+import OperatorComponent from "../OperatorComponent";
 
 // Component
 function OperationsFleetsCardsComponent({supplies}) {
@@ -29,6 +31,7 @@ function OperationsFleetsCardsComponent({supplies}) {
                                 </div>
                                 <div className="card-body">
                                     <ul className="list-group list-group-unbordered">
+                                        <OperatorComponent operator={item.operator} />
                                         <li className="list-group-item">
                                             <b>Créer le</b>
                                             <span className="float-right">{dateToString(item.creation)}</span>
@@ -48,15 +51,22 @@ function OperationsFleetsCardsComponent({supplies}) {
                                         </li>
                                         <li className="list-group-item">
                                             <b>Montant flotté</b>
-                                            <span className="float-right">{formatNumber(item.amount)}</span>
+                                            <span className="float-right text-success text-bold">
+                                                {formatNumber(item.amount)}
+                                            </span>
                                         </li>
                                         <li className="list-group-item">
                                             <b>Reste récouvrir</b>
                                             <span className="float-right text-danger text-bold">{formatNumber(item.remaining)}</span>
                                         </li>
                                         <li className="list-group-item">
-                                            <b>Gestionaire</b>
+                                            <b>Responsable</b>
                                             <span className="float-right">{item.supplier.name}</span>
+                                        </li>
+                                        <li className="list-group-item">
+                                            {item.status === DONE && <b className="text-success text-bold">Recouvert</b>}
+                                            {item.status === PROCESSING && <b className="text-primary text-bold">Recouvrement en-cours</b>}
+                                            {item.status === PENDING && <b className="text-danger text-bold">En attente de recouvrement</b>}
                                         </li>
                                     </ul>
                                 </div>

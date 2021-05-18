@@ -64,7 +64,7 @@ function OperationsFleetsPage({supplies, suppliesRequests, hasMoreData, page, di
                                                 <TableSearchComponent needle={needle} handleNeedle={handleNeedleInput} />
                                             </div>
                                         </div>
-                                     Sav  <div className="card-body">
+                                       <div className="card-body">
                                             {/* Error message */}
                                             {requestFailed(suppliesRequests.list) && <ErrorAlertComponent message={suppliesRequests.list.message} />}
                                             {requestFailed(suppliesRequests.next) && <ErrorAlertComponent message={suppliesRequests.next.message} />}
