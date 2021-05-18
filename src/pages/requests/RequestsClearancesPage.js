@@ -65,7 +65,7 @@ function RequestsClearancesPage({clearances, clearancesRequests, hasMoreData, pa
         <>
             <AppLayoutContainer pathname={location.pathname}>
                 <div className="content-wrapper">
-                    <HeaderComponent title="Demandes de déstockages" icon={'fa fa-rss-square'} />
+                    <HeaderComponent title="Mes demandes de déstockages" icon={'fa fa-rss-square'} />
                     <section className="content">
                         <div className='container-fluid'>
                             <div className="row">

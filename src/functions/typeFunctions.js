@@ -4,11 +4,11 @@ import {UNKNOWN} from "../constants/defaultConstants";
 // Badge color for fleet type
 export function fleetTypeBadgeColor(type) {
     switch (type) {
-        case types.CANCEL: return {background: 'bg-danger', border: 'border border-danger', text: 'ANNULEE'};
-        case types.DONE: return {background: 'bg-secondary', border: 'border border-secondary', text: 'EFFECTUEE'};
-        case types.PENDING: return {background: 'bg-warning', border: 'border border-warning', text: 'EN ATTENTE'};
-        case types.PROCESSING: return {background: 'bg-primary', border: 'border border-primary', text: 'EN COURS'};
-        default: return {background: 'bg-default', border: 'border border-default', text: 'INCONNU'};
+        case types.CANCEL: return {background: 'bg-danger', border: 'border border-danger', text: "annulé(e)".toUpperCase()};
+        case types.DONE: return {background: 'bg-secondary', border: 'border border-secondary', text: "effectué(e)".toUpperCase()};
+        case types.PENDING: return {background: 'bg-warning', border: 'border border-warning', text: "en attente".toUpperCase()};
+        case types.PROCESSING: return {background: 'bg-primary', border: 'border border-primary', text: "en cours".toUpperCase()};
+        default: return {background: 'bg-default', border: 'border border-default', text: "inconnu".toUpperCase()};
     }
 }
 

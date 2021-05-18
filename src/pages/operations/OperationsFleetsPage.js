@@ -52,7 +52,7 @@ function OperationsFleetsPage({supplies, suppliesRequests, hasMoreData, page, di
         <>
             <AppLayoutContainer pathname={location.pathname}>
                 <div className="content-wrapper">
-                    <HeaderComponent title={OPERATIONS_FLEETS_PAGE} icon={'fa fa-rss'} />
+                    <HeaderComponent title="Mes flottages réçus" icon={'fa fa-rss'} />
                     <section className="content">
                         <div className='container-fluid'>
                             <div className="row">
@@ -64,7 +64,7 @@ function OperationsFleetsPage({supplies, suppliesRequests, hasMoreData, page, di
                                                 <TableSearchComponent needle={needle} handleNeedle={handleNeedleInput} />
                                             </div>
                                         </div>
-                                        <div className="card-body">
+                                     Sav  <div className="card-body">
                                             {/* Error message */}
                                             {requestFailed(suppliesRequests.list) && <ErrorAlertComponent message={suppliesRequests.list.message} />}
                                             {requestFailed(suppliesRequests.next) && <ErrorAlertComponent message={suppliesRequests.next.message} />}

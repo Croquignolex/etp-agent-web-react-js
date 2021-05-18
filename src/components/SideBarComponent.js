@@ -18,7 +18,7 @@ function SideBarComponent({user, pathname}) {
         return [
             buildDashboardMenu(),
             buildRequestsMenu(),
-            // buildOperationsMenu(),
+            buildOperationsMenu(),
             // buildRecoveriesMenu(),
             // buildSimsMenu(),
         ];
@@ -138,7 +138,7 @@ function buildOperationsMenu() {
         icon: 'fa fa-bars',
         sub: [
             {name: page.OPERATIONS_FLEETS_PAGE, path: path.OPERATIONS_FLEETS_PAGE_PATH},
-            {name: page.OPERATIONS_CLEARANCES_PAGE, path: path.OPERATIONS_CLEARANCES_PAGE_PATH}
+            // {name: page.OPERATIONS_CLEARANCES_PAGE, path: path.OPERATIONS_CLEARANCES_PAGE_PATH}
         ]
     }
 }
