@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
+import {fleetTypeBadgeColor} from "../../functions/typeFunctions";
 
 // Component
 function RecoveriesCashCardsComponent({recoveries}) {
@@ -14,15 +15,19 @@ function RecoveriesCashCardsComponent({recoveries}) {
                         <div className="col-lg-4 col-md-6" key={key}>
                             <div className="card">
                                 <div className="card-header bg-secondary">
-                                    <h3 className="card-title text-bold">
-                                        <i className="fa fa-money-bill-alt" /> {formatNumber(item.amount)}
-                                    </h3>
+                                    <h3 className="card-title">RECOUVERT</h3>
                                 </div>
                                 <div className="card-body">
                                     <ul className="list-group list-group-unbordered">
                                         <li className="list-group-item">
                                             <b>Créer le</b>
                                             <span className="float-right">{dateToString(item.creation)}</span>
+                                        </li>
+                                        <li className="list-group-item">
+                                            <b>Montant</b>
+                                            <span className="float-right text-success text-bold">
+                                                {formatNumber(item.amount)}
+                                            </span>
                                         </li>
                                         <li className="list-group-item">
                                             <b>Responsable</b>
