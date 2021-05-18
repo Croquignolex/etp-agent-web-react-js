@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from "prop-types";
 
 import {DONE} from "../../constants/typeConstants";
+import OperatorComponent from "../OperatorComponent";
+import {fleetTypeBadgeColor} from "../../functions/typeFunctions";
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
 
 // Component
@@ -14,13 +16,12 @@ function OperationsClearancesCardsComponent({refuels}) {
                     return (
                         <div className="col-lg-4 col-md-6" key={key}>
                             <div className="card">
-                                <div className={`card-header ${item.status === DONE ? 'bg-secondary' : 'bg-primary'}`}>
-                                    <h3 className="card-title text-bold">
-                                        <i className="fa fa-money-bill" /> {formatNumber(item.amount)}
-                                    </h3>
+                                <div className={`${fleetTypeBadgeColor(item.status).background} card-header`}>
+                                    <h3 className="card-title">{fleetTypeBadgeColor(item.status).text}</h3>
                                 </div>
                                 <div className="card-body">
                                     <ul className="list-group list-group-unbordered">
+                                        <OperatorComponent operator={item.operator} />
                                         <li className="list-group-item">
                                             <b>Créer le</b>
                                             <span className="float-right">{dateToString(item.creation)}</span>
@@ -32,6 +33,12 @@ function OperationsClearancesCardsComponent({refuels}) {
                                         <li className="list-group-item">
                                             <b>Responsable</b>
                                             <span className="float-right">{item.collector.name}</span>
+                                        </li>
+                                        <li className="list-group-item">
+                                            <b>Montant</b>
+                                            <span className="float-right text-success text-bold">
+                                                {formatNumber(item.amount)}
+                                            </span>
                                         </li>
                                         <li className="list-group-item">
                                             {(item.status === DONE)

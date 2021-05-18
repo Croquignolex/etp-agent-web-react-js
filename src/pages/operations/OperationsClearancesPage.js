@@ -52,7 +52,7 @@ function OperationsClearancesPage({refuels, refuelsRequests, hasMoreData, page, 
         <>
             <AppLayoutContainer pathname={location.pathname}>
                 <div className="content-wrapper">
-                    <HeaderComponent title={OPERATIONS_CLEARANCES_PAGE} icon={'fa fa-rss-square'} />
+                    <HeaderComponent title="Mes déstockages éffectués" icon={'fa fa-rss-square'} />
                     <section className="content">
                         <div className='container-fluid'>
                             <div className="row">

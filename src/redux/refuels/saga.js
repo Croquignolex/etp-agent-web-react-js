@@ -65,6 +65,7 @@ function extractRefuelData(apiRefuel) {
         id: '', amount: '', creation: '', vendor: '', receipt: '', status: '',
 
         agent: {id: '', name: ''},
+        operator: {id: '', name: ''},
         collector: {id: '', name: ''},
         sim: {id: '', name: '', number: ''},
     };
@@ -73,6 +74,7 @@ function extractRefuelData(apiRefuel) {
     const apiUser = apiRefuel.user;
     const apiAgent = apiRefuel.agent;
     const apiCollector = apiRefuel.recouvreur;
+    const apiOperator = apiRefuel.operateur;
 
     if(apiAgent && apiUser) {
         refuel.agent = {
@@ -92,6 +94,12 @@ function extractRefuelData(apiRefuel) {
             name: apiCollector.name,
             id: apiCollector.id.toString()
         };
+    }
+    if(apiOperator) {
+        refuel.operator = {
+            name: apiOperator.nom,
+            id: apiOperator.id.toString(),
+        }
     }
     if(apiRefuel) {
         refuel.actionLoader = false;
