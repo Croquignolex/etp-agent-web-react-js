@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
 import PropTypes from "prop-types";
+import React, {useState} from 'react';
 
-import {DONE} from "../../constants/typeConstants";
 import OperatorComponent from "../OperatorComponent";
+import {DONE, PENDING} from "../../constants/typeConstants";
 import FormModalComponent from "../modals/FormModalComponent";
 import {fleetTypeBadgeColor} from "../../functions/typeFunctions";
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
@@ -26,9 +26,7 @@ function RequestsFleetsCardsComponent({fleets}) {
                     return (
                         <div className="col-lg-4 col-md-6" key={key}>
                             <div className="card">
-                                <div className={`${fleetTypeBadgeColor(item.status).background} card-header`}>
-                                    <h3 className="card-title">{fleetTypeBadgeColor(item.status).text}</h3>
-                                </div>
+                                <div className={`${fleetTypeBadgeColor(item.status).background} card-header`} />
                                 <div className="card-body">
                                     <ul className="list-group list-group-unbordered">
                                         <OperatorComponent operator={item.operator} />
@@ -36,14 +34,13 @@ function RequestsFleetsCardsComponent({fleets}) {
                                             <b>Créer le</b>
                                             <span className="float-right">{dateToString(item.creation)}</span>
                                         </li>
-                                        {(item.status !== DONE) ? (
-                                            <li className="list-group-item">
-                                                <b>Flotte démandée</b>
-                                                <span className="float-right text-success text-bold">
-                                                    {formatNumber(item.amount)}
-                                                </span>
-                                            </li>
-                                        ) : (
+                                        <li className="list-group-item">
+                                            <b>Flotte démandée</b>
+                                            <span className="float-right text-success text-bold">
+                                                {formatNumber(item.amount)}
+                                            </span>
+                                        </li>
+                                        {(item.status === DONE) && (
                                             <li className="list-group-item">
                                                 <b>Flotte servie</b>
                                                 <span className="float-right text-danger text-bold">
@@ -63,6 +60,10 @@ function RequestsFleetsCardsComponent({fleets}) {
                                         <li className="list-group-item">
                                             <b>Demandeur</b>
                                             <span className="float-right">{item.claimant.name}</span>
+                                        </li>
+                                        <li className="list-group-item">
+                                            {item.status === DONE && <b className="text-success text-bold">Flottée</b>}
+                                            {item.status === PENDING && <b className="text-danger text-bold">En attente de flottage</b>}
                                         </li>
                                     </ul>
                                 </div>

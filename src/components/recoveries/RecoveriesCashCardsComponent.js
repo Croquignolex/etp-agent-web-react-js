@@ -13,9 +13,7 @@ function RecoveriesCashCardsComponent({recoveries}) {
                     return (
                         <div className="col-lg-4 col-md-6" key={key}>
                             <div className="card">
-                                <div className="card-header bg-secondary">
-                                    <h3 className="card-title">RECOUVERT</h3>
-                                </div>
+                                <div className="card-header bg-secondary" />
                                 <div className="card-body">
                                     <ul className="list-group list-group-unbordered">
                                         <li className="list-group-item">
@@ -32,13 +30,6 @@ function RecoveriesCashCardsComponent({recoveries}) {
                                             <b>Responsable</b>
                                             <span className="float-right">{item.collector.name}</span>
                                         </li>
-                                        {item.receipt && (
-                                            <li className="list-group-item text-center">
-                                                <a download target='_blank' href={item.receipt} rel='noopener noreferrer' className="btn btn-theme">
-                                                    <i className="fa fa-file-archive" /> Reçus
-                                                </a>
-                                            </li>
-                                        )}
                                     </ul>
                                 </div>
                             </div>

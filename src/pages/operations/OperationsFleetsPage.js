@@ -92,7 +92,7 @@ function OperationsFleetsPage({supplies, suppliesRequests, hasMoreData, page, di
         </>
     )
 }
-R
+
 // Search engine
 function searchEngine(data, _needle) {
     // Avoid empty filtering

@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
 import PropTypes from "prop-types";
+import React, {useState} from 'react';
 
+import OperatorComponent from "../OperatorComponent";
 import FormModalComponent from "../modals/FormModalComponent";
 import {DONE, PROCESSING} from "../../constants/typeConstants";
 import {fleetTypeBadgeColor} from "../../functions/typeFunctions";
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
 import SimDetailsContainer from "../../containers/sims/SimDetailsContainer";
-import OperatorComponent from "../OperatorComponent";
 
 // Component
 function RecoveriesFleetsCardsComponent({returns}) {
@@ -26,9 +26,7 @@ function RecoveriesFleetsCardsComponent({returns}) {
                     return (
                         <div className="col-lg-4 col-md-6" key={key}>
                             <div className="card">
-                                <div className={`${fleetTypeBadgeColor(item.status).background} card-header`}>
-                                    <h3 className="card-title">{fleetTypeBadgeColor(item.status).text}</h3>
-                                </div>
+                                <div className={`${fleetTypeBadgeColor(item.status).background} card-header`} />
                                 <div className="card-body">
                                     <ul className="list-group list-group-unbordered">
                                         <OperatorComponent operator={item.operator} />
