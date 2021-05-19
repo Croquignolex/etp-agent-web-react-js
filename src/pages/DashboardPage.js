@@ -84,17 +84,6 @@ function DashboardPage({fleets, clearances, settings, dispatch,
                                     />
                                 </div>
                             }
-                            {cardsData.includes(setting.CARD_CLEARANCES_REQUEST_MTN) &&
-                                <div className="col-lg-4 col-md-4 col-sm-6">
-                                    <DashboardCardComponent color='bg-primary'
-                                                            operator={{id: '1'}}
-                                                            request={allClearancesRequests}
-                                                            url={path.REQUESTS_CLEARANCES_PAGE_PATH}
-                                                            data={formatNumber(mtnClearancesData.value)}
-                                                            label={`${setting.LABEL_CLEARANCES_REQUEST_MTN} (${mtnClearancesData.number})`}
-                                    />
-                                </div>
-                            }
                             {cardsData.includes(setting.CARD_FLEETS_REQUESTS_ORANGE) &&
                                 <div className="col-lg-4 col-md-4 col-sm-6">
                                     <DashboardCardComponent color='bg-success'
@@ -103,6 +92,17 @@ function DashboardPage({fleets, clearances, settings, dispatch,
                                                             url={path.REQUESTS_FLEETS_PAGE_PATH}
                                                             data={formatNumber(orangeFleetsData.value)}
                                                             label={`${setting.LABEL_FLEETS_REQUESTS_ORANGE} (${orangeFleetsData.number})`}
+                                    />
+                                </div>
+                            }
+                            {cardsData.includes(setting.CARD_CLEARANCES_REQUEST_MTN) &&
+                                <div className="col-lg-4 col-md-4 col-sm-6">
+                                    <DashboardCardComponent color='bg-primary'
+                                                            operator={{id: '1'}}
+                                                            request={allClearancesRequests}
+                                                            url={path.REQUESTS_CLEARANCES_PAGE_PATH}
+                                                            data={formatNumber(mtnClearancesData.value)}
+                                                            label={`${setting.LABEL_CLEARANCES_REQUEST_MTN} (${mtnClearancesData.number})`}
                                     />
                                 </div>
                             }
