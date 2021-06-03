@@ -6,9 +6,11 @@ import AmountComponent from "../form/AmountComponent";
 import SelectComponent from "../form/SelectComponent";
 import {emitAddFleet} from "../../redux/fleets/actions";
 import ErrorAlertComponent from "../ErrorAlertComponent";
+import {emitAllSimsFetch} from "../../redux/sims/actions";
 import {requiredChecker} from "../../functions/checkerFunctions";
 import {DEFAULT_FORM_DATA} from "../../constants/defaultConstants";
 import {playWarningSound} from "../../functions/playSoundFunctions";
+import {storeAllSimsRequestReset} from "../../redux/requests/sims/actions";
 import {storeAddFleetRequestReset} from "../../redux/requests/fleets/actions";
 import {dataToArrayForSelect, mappedSims} from "../../functions/arrayFunctions";
 import {applySuccess, requestFailed, requestLoading, requestSucceeded} from "../../functions/generalFunctions";
@@ -21,6 +23,7 @@ function RequestsFleetsAddFleetComponent({request, sims, user, allSimsRequests, 
 
     // Local effects
     useEffect(() => {
+        dispatch(emitAllSimsFetch());
         // Cleaner error alert while component did unmount without store dependency
         return () => {
             shouldResetErrorData();
@@ -55,6 +58,7 @@ function RequestsFleetsAddFleetComponent({request, sims, user, allSimsRequests, 
 
     // Reset error alert
     const shouldResetErrorData = () => {
+        dispatch(storeAllSimsRequestReset());
         dispatch(storeAddFleetRequestReset());
     };
 
