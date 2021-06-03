@@ -5,10 +5,12 @@ import ButtonComponent from "../form/ButtonComponent";
 import AmountComponent from "../form/AmountComponent";
 import SelectComponent from "../form/SelectComponent";
 import ErrorAlertComponent from "../ErrorAlertComponent";
+import {emitAllSimsFetch} from "../../redux/sims/actions";
 import {emitAddClearance} from "../../redux/clearances/actions";
 import {requiredChecker} from "../../functions/checkerFunctions";
 import {DEFAULT_FORM_DATA} from "../../constants/defaultConstants";
 import {playWarningSound} from "../../functions/playSoundFunctions";
+import {storeAllSimsRequestReset} from "../../redux/requests/sims/actions";
 import {dataToArrayForSelect, mappedSims} from "../../functions/arrayFunctions";
 import {storeAddClearanceRequestReset} from "../../redux/requests/clearances/actions";
 import {applySuccess, requestFailed, requestLoading, requestSucceeded} from "../../functions/generalFunctions";
@@ -21,6 +23,7 @@ function RequestsClearancesAddClearanceComponent({request, sims, user, allSimsRe
 
     // Local effects
     useEffect(() => {
+        dispatch(emitAllSimsFetch());
         // Cleaner error alert while component did unmount without store dependency
         return () => {
             shouldResetErrorData();
@@ -55,6 +58,7 @@ function RequestsClearancesAddClearanceComponent({request, sims, user, allSimsRe
 
     // Reset error alert
     const shouldResetErrorData = () => {
+        dispatch(storeAllSimsRequestReset());
         dispatch(storeAddClearanceRequestReset());
     };
 
