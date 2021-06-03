@@ -53,8 +53,8 @@ function RequestsFleetsAddFleetComponent({request, sims, user, allSimsRequests, 
 
     // Build select options
     const incomingSelectOptions = useMemo(() => {
-        return dataToArrayForSelect(mappedSims(sims.filter(item => item.agent.id === user.id)))
-    }, [sims, user.id]);
+        return dataToArrayForSelect(mappedSims(sims));
+    }, [sims]);
 
     // Reset error alert
     const shouldResetErrorData = () => {

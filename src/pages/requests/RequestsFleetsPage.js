@@ -81,7 +81,7 @@ function RequestsFleetsPage({fleets, fleetsRequests, hasMoreData, page, dispatch
                                                     className="btn btn-theme mb-2"
                                                     onClick={handleFleetModalShow}
                                             >
-                                                <i className="fa fa-plus" /> Passer une demande de flotte
+                                                <i className="fa fa-rss" /> Passer une demande de flotte
                                             </button>
                                             {/* Search result & Infinite scroll */}
                                             {(needle !== '' && needle !== undefined)
