@@ -7,9 +7,7 @@ import returns from './returns/saga';
 import refuels from './refuels/saga';
 import settings from './settings/saga';
 import supplies from './supplies/saga';
-import operators from './operators/saga';
 import clearances from './clearances/saga';
-import collectors from './collectors/saga';
 import recoveries from './recoveries/saga';
 import notifications from './notifications/saga';
 
@@ -23,10 +21,8 @@ export default function* sagas() {
         refuels(),
         supplies(),
         settings(),
-        operators(),
         clearances(),
         recoveries(),
-        collectors(),
         notifications(),
     ]);
 }
