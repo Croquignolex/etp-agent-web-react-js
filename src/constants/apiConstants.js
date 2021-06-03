@@ -32,12 +32,6 @@ export const SIM_API_PATH = `${API_URL}/show_puce`;
 export const SIMS_API_PATH = `${API_URL}/puce_list_resource`;
 export const All_SIMS_API_PATH = `${API_URL}/puce_list_resource_all`;
 
-// Collectors
-export const ALL_COLLECTORS_API_PATH = `${API_URL}/recouvreurs_all`;
-
-// Operators
-export const All_OPERATORS_API_PATH = `${API_URL}/flote_list_all`;
-
 // Recoveries
 export const CASH_RECOVERIES_API_PATH = `${API_URL}/list_recouvrement_by_agent`;
 export const FLEET_RECOVERIES_API_PATH = `${API_URL}/list_retour_flotte_by_agent`;
