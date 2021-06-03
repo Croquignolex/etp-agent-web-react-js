@@ -39,10 +39,8 @@ function OperationsClearancesCardsComponent({refuels}) {
                                             </span>
                                         </li>
                                         <li className="list-group-item">
-                                            <li className="list-group-item">
-                                                {item.status === DONE && <b className="text-success text-bold">Confirmé</b>}
-                                                {item.status === PROCESSING && <b className="text-danger text-bold">En attente de confirmation</b>}
-                                            </li>
+                                            {item.status === DONE && <b className="text-success text-bold">Confirmé</b>}
+                                            {item.status === PROCESSING && <b className="text-danger text-bold">En attente de confirmation</b>}
                                         </li>
                                     </ul>
                                 </div>
