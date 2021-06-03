@@ -74,7 +74,7 @@ function DashboardPage({fleets, clearances, settings, dispatch,
                     <div className='container-fluid'>
                         <div className="row">
                             {cardsData.includes(setting.CARD_FLEETS_REQUESTS_MTN) &&
-                                <div className="col-lg-4 col-md-4 col-sm-6">
+                                <div className="col-lg-3 col-md-4 col-sm-6">
                                     <DashboardCardComponent color='bg-success'
                                                             operator={{id: '1'}}
                                                             request={allFleetsRequests}
@@ -85,7 +85,7 @@ function DashboardPage({fleets, clearances, settings, dispatch,
                                 </div>
                             }
                             {cardsData.includes(setting.CARD_FLEETS_REQUESTS_ORANGE) &&
-                                <div className="col-lg-4 col-md-4 col-sm-6">
+                                <div className="col-lg-3 col-md-4 col-sm-6">
                                     <DashboardCardComponent color='bg-success'
                                                             operator={{id: '2'}}
                                                             request={allFleetsRequests}
@@ -96,7 +96,7 @@ function DashboardPage({fleets, clearances, settings, dispatch,
                                 </div>
                             }
                             {cardsData.includes(setting.CARD_CLEARANCES_REQUEST_MTN) &&
-                                <div className="col-lg-4 col-md-4 col-sm-6">
+                                <div className="col-lg-3 col-md-4 col-sm-6">
                                     <DashboardCardComponent color='bg-primary'
                                                             operator={{id: '1'}}
                                                             request={allClearancesRequests}
@@ -107,7 +107,7 @@ function DashboardPage({fleets, clearances, settings, dispatch,
                                 </div>
                             }
                             {cardsData.includes(setting.CARD_CLEARANCES_REQUEST_ORANGE) &&
-                                <div className="col-lg-4 col-md-4 col-sm-6">
+                                <div className="col-lg-3 col-md-4 col-sm-6">
                                     <DashboardCardComponent color='bg-primary'
                                                             operator={{id: '2'}}
                                                             request={allClearancesRequests}
