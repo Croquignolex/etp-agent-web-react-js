@@ -90,12 +90,12 @@ export function* emitAllClearancesFetch() {
 
 // New clearance from API
 export function* emitAddClearance() {
-    yield takeLatest(EMIT_ADD_CLEARANCE, function*({sim, amount, id}) {
+    yield takeLatest(EMIT_ADD_CLEARANCE, function*({sim, amount}) {
         try {
             // Fire event for request
             yield put(storeAddClearanceRequestInit());
             const data = {id_puce: sim, montant: amount};
-            const apiResponse = yield call(apiPostRequest, `${api.NEW_CLEARANCE_API_PATH}/${id}`, data);
+            const apiResponse = yield call(apiPostRequest, api.NEW_CLEARANCE_API_PATH, data);
             // Extract data
             const clearance = extractClearanceData(
                 apiResponse.data.puce,

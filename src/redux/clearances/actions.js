@@ -64,8 +64,7 @@ export const emitAllClearancesFetch = () => ({
 });
 
 // Emit add clearance
-export const emitAddClearance = ({sim, amount, id}) => ({
-    id,
+export const emitAddClearance = ({sim, amount}) => ({
     sim,
     amount,
     type: EMIT_ADD_CLEARANCE

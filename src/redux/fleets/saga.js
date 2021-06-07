@@ -90,12 +90,12 @@ export function* emitAllFleetsFetch() {
 
 // New fleet from API
 export function* emitAddFleet() {
-    yield takeLatest(EMIT_ADD_FLEET, function*({sim, amount, id}) {
+    yield takeLatest(EMIT_ADD_FLEET, function*({sim, amount}) {
         try {
             // Fire event for request
             yield put(storeAddFleetRequestInit());
             const data = {id_puce: sim, montant: amount};
-            const apiResponse = yield call(apiPostRequest, `${api.NEW_FLEET_API_PATH}/${id}`, data);
+            const apiResponse = yield call(apiPostRequest, api.NEW_FLEET_API_PATH, data);
             // Extract data
             const fleet = extractFleetData(
                 apiResponse.data.puce,

@@ -16,7 +16,7 @@ import {storeAddClearanceRequestReset} from "../../redux/requests/clearances/act
 import {applySuccess, requestFailed, requestLoading, requestSucceeded} from "../../functions/generalFunctions";
 
 // Component
-function RequestsClearancesAddClearanceComponent({request, sims, user, allSimsRequests, dispatch, handleClose}) {
+function RequestsClearancesAddClearanceComponent({request, sims, allSimsRequests, dispatch, handleClose}) {
     // Local state
     const [amount, setAmount] = useState(DEFAULT_FORM_DATA);
     const [incomingSim, setIncomingSim] = useState(DEFAULT_FORM_DATA);
@@ -75,7 +75,6 @@ function RequestsClearancesAddClearanceComponent({request, sims, user, allSimsRe
         // Check
         if(validationOK) {
             dispatch(emitAddClearance({
-                id: user.id,
                 amount: _amount.data,
                 sim: _incomingSim.data,
             }));
@@ -103,7 +102,7 @@ function RequestsClearancesAddClearanceComponent({request, sims, user, allSimsRe
                     <div className='col-sm-6'>
                         <AmountComponent input={amount}
                                          id='inputFleet'
-                                         label='Flotte demandé'
+                                         label='Montant à déstocker'
                                          handleInput={handleAmountInput}
                         />
                     </div>
@@ -119,7 +118,6 @@ function RequestsClearancesAddClearanceComponent({request, sims, user, allSimsRe
 // Prop types to ensure destroyed props data type
 RequestsClearancesAddClearanceComponent.propTypes = {
     sims: PropTypes.array.isRequired,
-    user: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
     request: PropTypes.object.isRequired,
     handleClose: PropTypes.func.isRequired,
