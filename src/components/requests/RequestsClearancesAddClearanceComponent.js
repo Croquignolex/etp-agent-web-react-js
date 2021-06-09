@@ -92,9 +92,9 @@ function RequestsClearancesAddClearanceComponent({request, sims, allSimsRequests
                     <div className='col-sm-6'>
                         <SelectComponent input={incomingSim}
                                          id='inputSimAgent'
+                                         label='Puce à déstocker'
                                          title='Choisir une puce'
                                          options={incomingSelectOptions}
-                                         label="Puce de l'agent/ressource"
                                          handleInput={handleIncomingSelect}
                                          requestProcessing={requestLoading(allSimsRequests)}
                         />
@@ -102,7 +102,7 @@ function RequestsClearancesAddClearanceComponent({request, sims, allSimsRequests
                     <div className='col-sm-6'>
                         <AmountComponent input={amount}
                                          id='inputFleet'
-                                         label='Montant à déstocker'
+                                         label='Montant demandé'
                                          handleInput={handleAmountInput}
                         />
                     </div>
