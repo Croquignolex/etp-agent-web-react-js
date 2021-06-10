@@ -5,14 +5,12 @@ import {DONE} from "../constants/typeConstants";
 import * as path from "../constants/pagePathConstants";
 import * as setting from "../constants/settingsConstants";
 import {emitAllFleetsFetch} from "../redux/fleets/actions";
-import {emitFetchUserBalance} from "../redux/user/actions";
 import {formatNumber} from "../functions/generalFunctions";
 import HeaderComponent from "../components/HeaderComponent";
 import {DASHBOARD_PAGE} from "../constants/pageNameConstants";
 import AppLayoutContainer from "../containers/AppLayoutContainer";
 import {emitAllClearancesFetch} from "../redux/clearances/actions";
 import {storeAllFleetsRequestReset} from "../redux/requests/fleets/actions";
-import {storeUserBalanceFetchRequestReset} from "../redux/requests/user/actions";
 import DashboardCardComponent from "../components/dashboard/DashboardCardComponent";
 import {storeAllClearancesRequestReset} from "../redux/requests/clearances/actions";
 
@@ -22,7 +20,6 @@ function DashboardPage({fleets, clearances, settings, dispatch,
     // Local effects
     useEffect(() => {
         dispatch(emitAllFleetsFetch());
-        dispatch(emitFetchUserBalance());
         dispatch(emitAllClearancesFetch());
         // Cleaner error alert while component did unmount without store dependency
         return () => {
@@ -35,7 +32,6 @@ function DashboardPage({fleets, clearances, settings, dispatch,
     const shouldResetErrorData = () => {
         dispatch(storeAllFleetsRequestReset());
         dispatch(storeAllClearancesRequestReset());
-        dispatch(storeUserBalanceFetchRequestReset());
     };
 
     // Data
@@ -52,6 +48,12 @@ function DashboardPage({fleets, clearances, settings, dispatch,
         const value = data.reduce((acc, val) => acc + parseInt(val.amount), 0)
         return {number, value}
     }, [fleets]);
+    const yupFleetsData = useMemo(() => {
+        const data = fleets.filter(fleet => (fleet.status !== DONE) && fleet.operator.id === '3');
+        const number = data.length
+        const value = data.reduce((acc, val) => acc + parseInt(val.amount), 0)
+        return {number, value}
+    }, [fleets]);
     const mtnClearancesData = useMemo(() => {
         const data = clearances.filter(clearance => (clearance.status !== DONE) && clearance.operator.id === '1');
         const number = data.length
@@ -60,6 +62,12 @@ function DashboardPage({fleets, clearances, settings, dispatch,
     }, [clearances]);
     const orangeClearancesData = useMemo(() => {
         const data = clearances.filter(clearance => (clearance.status !== DONE) && clearance.operator.id === '2');
+        const number = data.length
+        const value = data.reduce((acc, val) => acc + parseInt(val.amount), 0)
+        return {number, value}
+    }, [clearances]);
+    const yupClearancesData = useMemo(() => {
+        const data = clearances.filter(clearance => (clearance.status !== DONE) && clearance.operator.id === '3');
         const number = data.length
         const value = data.reduce((acc, val) => acc + parseInt(val.amount), 0)
         return {number, value}
@@ -95,6 +103,17 @@ function DashboardPage({fleets, clearances, settings, dispatch,
                                     />
                                 </div>
                             }
+                            {cardsData.includes(setting.CARD_FLEETS_REQUESTS_YUP) &&
+                                <div className="col-lg-3 col-md-4 col-sm-6">
+                                    <DashboardCardComponent color='bg-success'
+                                                            operator={{id: '3'}}
+                                                            request={allFleetsRequests}
+                                                            url={path.REQUESTS_FLEETS_PAGE_PATH}
+                                                            data={formatNumber(yupFleetsData.value)}
+                                                            label={`${setting.LABEL_FLEETS_REQUESTS_YUP} (${yupFleetsData.number})`}
+                                    />
+                                </div>
+                            }
                             {cardsData.includes(setting.CARD_CLEARANCES_REQUEST_MTN) &&
                                 <div className="col-lg-3 col-md-4 col-sm-6">
                                     <DashboardCardComponent color='bg-primary'
@@ -114,6 +133,17 @@ function DashboardPage({fleets, clearances, settings, dispatch,
                                                             url={path.REQUESTS_CLEARANCES_PAGE_PATH}
                                                             data={formatNumber(orangeClearancesData.value)}
                                                             label={`${setting.LABEL_CLEARANCES_REQUEST_ORANGE} (${orangeClearancesData.number})`}
+                                    />
+                                </div>
+                            }
+                            {cardsData.includes(setting.CARD_CLEARANCES_REQUEST_YUP) &&
+                                <div className="col-lg-3 col-md-4 col-sm-6">
+                                    <DashboardCardComponent color='bg-primary'
+                                                            operator={{id: '3'}}
+                                                            request={allClearancesRequests}
+                                                            url={path.REQUESTS_CLEARANCES_PAGE_PATH}
+                                                            data={formatNumber(yupClearancesData.value)}
+                                                            label={`${setting.LABEL_CLEARANCES_REQUEST_YUP} (${yupClearancesData.number})`}
                                     />
                                 </div>
                             }
