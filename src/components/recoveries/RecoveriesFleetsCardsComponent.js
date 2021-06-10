@@ -11,7 +11,7 @@ import SimDetailsContainer from "../../containers/sims/SimDetailsContainer";
 // Component
 function RecoveriesFleetsCardsComponent({returns}) {
     // Local states
-    const [simDetailsModal, setSimDetailsModal] = useState({show: false, header: "DETAIL DE LA PUCE", id: ''});
+    const [simDetailsModal, setSimDetailsModal] = useState({show: false, header: "DETAIL DU COMPTE", id: ''});
 
     // Hide sim details modal form
     const handleSimDetailsModalHide = () => {

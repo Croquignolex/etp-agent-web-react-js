@@ -35,7 +35,7 @@ function SimDetailsComponent({id, sim, dispatch, request}) {
                         <div className="col-lg-12 col-md-12">
                             <div className="card">
                                 <div className={`${simTypeBadgeColor(sim.type.name).background} card-header`}>
-                                    <h3 className="card-title">PUCE {simTypeBadgeColor(sim.type.name).text}</h3>
+                                    <h3 className="card-title">COMPTE {simTypeBadgeColor(sim.type.name).text}</h3>
                                 </div>
                                 <div className="card-body"><SimCardComponent sim={sim} /></div>
                             </div>
