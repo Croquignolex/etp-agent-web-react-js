@@ -17,12 +17,6 @@ import CheckBoxComponent from "../components/form/CheckBoxComponent";
 import {storeSettingsRequestReset} from "../redux/requests/settings/actions";
 import {DEFAULT_ARRAY_FORM_DATA, DEFAULT_FORM_DATA} from "../constants/defaultConstants";
 import {applySuccess, requestFailed, requestLoading, requestSucceeded} from "../functions/generalFunctions";
-import {
-    CARD_CLEARANCES_REQUEST_YUP,
-    CARD_FLEETS_REQUESTS_YUP,
-    LABEL_CLEARANCES_REQUEST_YUP, LABEL_FLEETS_REQUESTS_YUP
-} from "../constants/settingsConstants";
-
 
 // Component
 function SettingsPage({settings, request, dispatch, location}) {
