@@ -92,7 +92,7 @@ function RequestsFleetsAddFleetComponent({request, sims, allSimsRequests, dispat
                     <div className='col-sm-6'>
                         <SelectComponent id='inputSimAgent'
                                          input={incomingSim}
-                                         label="Puce à flotter"
+                                         label="Compte à flotter"
                                          title='Choisir une puce'
                                          options={incomingSelectOptions}
                                          handleInput={handleIncomingSelect}
