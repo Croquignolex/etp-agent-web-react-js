@@ -92,8 +92,8 @@ function RequestsClearancesAddClearanceComponent({request, sims, allSimsRequests
                     <div className='col-sm-6'>
                         <SelectComponent input={incomingSim}
                                          id='inputSimAgent'
-                                         label='Puce à déstocker'
-                                         title='Choisir une puce'
+                                         label='Compte à déstocker'
+                                         title='Choisir un compte'
                                          options={incomingSelectOptions}
                                          handleInput={handleIncomingSelect}
                                          requestProcessing={requestLoading(allSimsRequests)}

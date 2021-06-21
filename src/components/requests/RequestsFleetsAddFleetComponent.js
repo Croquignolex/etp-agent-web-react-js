@@ -93,7 +93,7 @@ function RequestsFleetsAddFleetComponent({request, sims, allSimsRequests, dispat
                         <SelectComponent id='inputSimAgent'
                                          input={incomingSim}
                                          label="Compte à flotter"
-                                         title='Choisir une puce'
+                                         title='Choisir un compte'
                                          options={incomingSelectOptions}
                                          handleInput={handleIncomingSelect}
                                          requestProcessing={requestLoading(allSimsRequests)}
