@@ -25,7 +25,7 @@ function OperationsClearancesCardsComponent({refuels}) {
                                             <span className="float-right">{dateToString(item.creation)}</span>
                                         </li>
                                         <li className="list-group-item">
-                                            <b>Puce réceptrice</b>
+                                            <b>Compte recepteur</b>
                                             <span className="float-right">{item.sim.number}</span>
                                         </li>
                                         <li className="list-group-item">

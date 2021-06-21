@@ -41,7 +41,7 @@ function RecoveriesFleetsCardsComponent({returns}) {
                                             </span>
                                         </li>
                                         <li className="list-group-item">
-                                            <b>Puce émetrice</b>
+                                            <b>Compte émetteur</b>
                                             <span className="float-right">
                                                 {item.sim_outgoing.number}
                                                 <i className="fa fa-question-circle small ml-1 hand-cursor text-theme"
@@ -50,7 +50,7 @@ function RecoveriesFleetsCardsComponent({returns}) {
                                             </span>
                                         </li>
                                         <li className="list-group-item">
-                                            <b>Puce receptrice</b>
+                                            <b>Compte recepteur</b>
                                             <span className="float-right">{item.sim_incoming.number}</span>
                                         </li>
                                         <li className="list-group-item">
