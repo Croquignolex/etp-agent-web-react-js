@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, {useEffect, useState} from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import {emitAllSimsFetch} from "../../redux/sims/actions";
 import HeaderComponent from "../../components/HeaderComponent";
 import LoaderComponent from "../../components/LoaderComponent";
 import AppLayoutContainer from "../../containers/AppLayoutContainer";
@@ -22,7 +21,6 @@ function OperationsClearancesPage({refuels, refuelsRequests, hasMoreData, page, 
     // Local effects
     useEffect(() => {
         dispatch(emitRefuelsFetch());
-        dispatch(emitAllSimsFetch());
         // Cleaner error alert while component did unmount without store dependency
         return () => {
             shouldResetErrorData();

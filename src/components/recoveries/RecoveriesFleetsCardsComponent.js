@@ -3,8 +3,8 @@ import React, {useState} from 'react';
 
 import OperatorComponent from "../OperatorComponent";
 import FormModalComponent from "../modals/FormModalComponent";
-import {DONE, PROCESSING} from "../../constants/typeConstants";
 import {fleetTypeBadgeColor} from "../../functions/typeFunctions";
+import {CANCEL, DONE, PROCESSING} from "../../constants/typeConstants";
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
 import SimDetailsContainer from "../../containers/sims/SimDetailsContainer";
 
@@ -54,6 +54,7 @@ function RecoveriesFleetsCardsComponent({returns}) {
                                             <span className="float-right">{item.sim_incoming.number}</span>
                                         </li>
                                         <li className="list-group-item">
+                                            {item.status === CANCEL && <b className="text-danger text-bold">Annulé</b>}
                                             {item.status === DONE && <b className="text-success text-bold">Confirmé</b>}
                                             {item.status === PROCESSING && <b className="text-danger text-bold">En attente de confirmation</b>}
                                         </li>
