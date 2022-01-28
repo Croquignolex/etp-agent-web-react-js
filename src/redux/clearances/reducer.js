@@ -1,6 +1,7 @@
 import Lodash from "lodash";
 
 import * as actions from "./actions";
+import {CANCEL} from "../../constants/typeConstants";
 
 // Partial global store for users data management
 const initialState = {
@@ -35,6 +36,18 @@ function reduce(state = initialState, action) {
                 ...state,
                 list: Lodash.map(state.list, (item) => {
                     if(item.id === action.id) item.actionLoader = !item.actionLoader;
+                    return item;
+                })
+            };
+            return nextState || state;
+        // Resolve event to cancel clearance data
+        case actions.STORE_CANCEL_CLEARANCE_DATA:
+            nextState = {
+                ...state,
+                list: Lodash.map(state.list, (item) => {
+                    if(item.id === action.id) {
+                        item.status = CANCEL;
+                    }
                     return item;
                 })
             };

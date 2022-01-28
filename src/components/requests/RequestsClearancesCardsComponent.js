@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
 import PropTypes from "prop-types";
 
+import LoaderComponent from "../LoaderComponent";
 import OperatorComponent from "../OperatorComponent";
 import FormModalComponent from "../modals/FormModalComponent";
 import {fleetTypeBadgeColor} from "../../functions/typeFunctions";
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
 import SimDetailsContainer from "../../containers/sims/SimDetailsContainer";
-import {DONE, PENDING, PROCESSING} from "../../constants/typeConstants";
+import {CANCEL, DONE, PENDING, PROCESSING} from "../../constants/typeConstants";
 
 // Component
-function RequestsClearancesCardsComponent({clearances}) {
+function RequestsClearancesCardsComponent({clearances, handleCancelModalShow}) {
     // Local states
     const [simDetailsModal, setSimDetailsModal] = useState({show: false, header: "DETAIL DU COMPTE", id: ''});
 
@@ -60,11 +61,24 @@ function RequestsClearancesCardsComponent({clearances}) {
                                             <span className="float-right">{item.claimant.name}</span>
                                         </li>
                                         <li className="list-group-item">
+                                            {item.status === CANCEL && <b className="text-danger text-bold">Annulé</b>}
                                             {item.status === DONE && <b className="text-success text-bold">Pris en charge totalement</b>}
                                             {item.status === PROCESSING && <b className="text-primary text-bold">Pris en charge partiellement</b>}
                                             {item.status === PENDING && <b className="text-danger text-bold">En attente de prise en charge</b>}
                                         </li>
                                     </ul>
+                                    {(item.status === PENDING) && (
+                                        <div className="mt-3 text-right">
+                                            {item.actionLoader ? <LoaderComponent little={true} /> : (
+                                                <button type="button"
+                                                        className="btn btn-danger btn-sm"
+                                                        onClick={() => handleCancelModalShow(item)}
+                                                >
+                                                    <i className="fa fa-times" /> Annuler
+                                                </button>
+                                            )}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -88,7 +102,8 @@ function RequestsClearancesCardsComponent({clearances}) {
 
 // Prop types to ensure destroyed props data type
 RequestsClearancesCardsComponent.propTypes = {
-    clearances: PropTypes.array.isRequired
+    clearances: PropTypes.array.isRequired,
+    handleCancelModalShow: PropTypes.func.isRequired,
 };
 
 export default React.memo(RequestsClearancesCardsComponent);

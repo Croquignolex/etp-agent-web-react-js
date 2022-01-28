@@ -9,16 +9,24 @@ import AppLayoutContainer from "../../containers/AppLayoutContainer";
 import ErrorAlertComponent from "../../components/ErrorAlertComponent";
 import TableSearchComponent from "../../components/TableSearchComponent";
 import FormModalComponent from "../../components/modals/FormModalComponent";
-import {emitClearancesFetch, emitNextClearancesFetch} from "../../redux/clearances/actions";
-import {dateToString, needleSearch, requestFailed,requestLoading} from "../../functions/generalFunctions";
+import DeleteModelComponent from "../../components/modals/DeleteModalComponent";
 import RequestsClearancesCardsComponent from "../../components/requests/RequestsClearancesCardsComponent";
+import {emitCancelClearance, emitClearancesFetch, emitNextClearancesFetch} from "../../redux/clearances/actions";
 import {storeClearancesRequestReset, storeNextClearancesRequestReset} from "../../redux/requests/clearances/actions";
 import RequestsClearancesAddClearanceContainer from "../../containers/requests/RequestsClearancesAddClearanceContainer";
+import {
+    dateToString,
+    formatNumber,
+    needleSearch,
+    requestFailed,
+    requestLoading
+} from "../../functions/generalFunctions";
 
 // Component
 function RequestsClearancesPage({clearances, clearancesRequests, hasMoreData, page, dispatch, location}) {
     // Local states
     const [needle, setNeedle] = useState('');
+    const [cancelModal, setCancelModal] = useState({show: false, body: '', id: 0});
     const [clearanceModal, setClearanceModal] = useState({show: false, header: 'PASSER UNE DEMANDE DE DESTOCKAGE'});
 
     // Local effects
@@ -56,6 +64,22 @@ function RequestsClearancesPage({clearances, clearancesRequests, hasMoreData, pa
         setClearanceModal({...clearanceModal, show: false})
     }
 
+    // Show cancel modal form
+    const handleCancelModalShow = ({id, amount, sim}) => {
+        setCancelModal({...cancelModal, id, body: `Annuler la demande de déstockage vers ${sim.number} de ${formatNumber(amount)}?`, show: true})
+    }
+
+    // Hide cancel modal form
+    const handleCancelModalHide = () => {
+        setCancelModal({...cancelModal, show: false})
+    }
+
+    // Trigger when clearance cancel confirmed on modal
+    const handleCancel = (id) => {
+        handleCancelModalHide();
+        dispatch(emitCancelClearance({id}));
+    };
+
     // Render
     return (
         <>
@@ -85,7 +109,9 @@ function RequestsClearancesPage({clearances, clearancesRequests, hasMoreData, pa
                                             </button>
                                             {/* Search result & Infinite scroll */}
                                             {(needle !== '' && needle !== undefined)
-                                                ? <RequestsClearancesCardsComponent clearances={searchEngine(clearances, needle)} />
+                                                ? <RequestsClearancesCardsComponent clearances={searchEngine(clearances, needle)}
+                                                                                    handleCancelModalShow={handleCancelModalShow}
+                                                />
                                                 : (requestLoading(clearancesRequests.list) ? <LoaderComponent /> :
                                                         <InfiniteScroll hasMore={hasMoreData}
                                                                         loader={<LoaderComponent />}
@@ -93,7 +119,9 @@ function RequestsClearancesPage({clearances, clearancesRequests, hasMoreData, pa
                                                                         style={{ overflow: 'hidden' }}
                                                                         next={handleNextClearancesData}
                                                         >
-                                                            <RequestsClearancesCardsComponent clearances={clearances} />
+                                                            <RequestsClearancesCardsComponent clearances={clearances}
+                                                                                              handleCancelModalShow={handleCancelModalShow}
+                                                            />
                                                         </InfiniteScroll>
                                                 )
                                             }
@@ -106,6 +134,10 @@ function RequestsClearancesPage({clearances, clearancesRequests, hasMoreData, pa
                 </div>
             </AppLayoutContainer>
             {/* Modal */}
+            <DeleteModelComponent modal={cancelModal}
+                                  handleModal={handleCancel}
+                                  handleClose={handleCancelModalHide}
+            />
             <FormModalComponent modal={clearanceModal} handleClose={handleClearanceModalHide}>
                 <RequestsClearancesAddClearanceContainer handleClose={handleClearanceModalHide} />
             </FormModalComponent>
