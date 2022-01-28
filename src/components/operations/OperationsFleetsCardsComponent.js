@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import PropTypes from "prop-types";
 
+import OperatorComponent from "../OperatorComponent";
 import FormModalComponent from "../modals/FormModalComponent";
 import {fleetTypeBadgeColor} from "../../functions/typeFunctions";
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
 import SimDetailsContainer from "../../containers/sims/SimDetailsContainer";
-import {DONE, PENDING, PROCESSING} from "../../constants/typeConstants";
-import OperatorComponent from "../OperatorComponent";
+import {CANCEL, DONE, PENDING, PROCESSING} from "../../constants/typeConstants";
 
 // Component
 function OperationsFleetsCardsComponent({supplies}) {
@@ -62,9 +62,10 @@ function OperationsFleetsCardsComponent({supplies}) {
                                             <span className="float-right">{item.supplier.name}</span>
                                         </li>
                                         <li className="list-group-item">
-                                            {item.status === DONE && <b className="text-success text-bold">Recouvert</b>}
-                                            {item.status === PROCESSING && <b className="text-primary text-bold">Recouvrement en-cours</b>}
+                                            {item.status === CANCEL && <b className="text-danger text-bold">Annulé</b>}
+                                            {item.status === DONE && <b className="text-success text-bold">Recouvert totalement</b>}
                                             {item.status === PENDING && <b className="text-danger text-bold">En attente de recouvrement</b>}
+                                            {item.status === PROCESSING && <b className="text-primary text-bold">Recouvert partiellement</b>}
                                         </li>
                                     </ul>
                                 </div>

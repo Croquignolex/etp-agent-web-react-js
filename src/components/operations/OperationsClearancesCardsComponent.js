@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from "prop-types";
 
 import OperatorComponent from "../OperatorComponent";
-import {DONE, PROCESSING} from "../../constants/typeConstants";
 import {fleetTypeBadgeColor} from "../../functions/typeFunctions";
+import {CANCEL, DONE, PROCESSING} from "../../constants/typeConstants";
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
 
 // Component
@@ -40,6 +40,7 @@ function OperationsClearancesCardsComponent({refuels}) {
                                         </li>
                                         <li className="list-group-item">
                                             {item.status === DONE && <b className="text-success text-bold">Confirmé</b>}
+                                            {item.status === CANCEL && <b className="text-danger text-bold">Annulé</b>}
                                             {item.status === PROCESSING && <b className="text-danger text-bold">En attente de confirmation</b>}
                                         </li>
                                     </ul>
