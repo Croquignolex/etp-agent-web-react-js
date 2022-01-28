@@ -19,6 +19,11 @@ export const STORE_ADD_FLEET_REQUEST_RESET = 'STORE_ADD_FLEET_REQUEST_RESET';
 export const STORE_ADD_FLEET_REQUEST_FAILED = 'STORE_ADD_FLEET_REQUEST_FAILED';
 export const STORE_ADD_FLEET_REQUEST_SUCCEEDED = 'STORE_ADD_FLEET_REQUEST_SUCCEEDED';
 
+export const STORE_CANCEL_FLEET_REQUEST_INIT = 'STORE_CANCEL_FLEET_REQUEST_INIT';
+export const STORE_CANCEL_FLEET_REQUEST_RESET = 'STORE_CANCEL_FLEET_REQUEST_RESET';
+export const STORE_CANCEL_FLEET_REQUEST_FAILED = 'STORE_CANCEL_FLEET_REQUEST_FAILED';
+export const STORE_CANCEL_FLEET_REQUEST_SUCCEEDED = 'STORE_CANCEL_FLEET_REQUEST_SUCCEEDED';
+
 // ======================================================== Fleets
 // Set fleets init data into store
 export const storeFleetsRequestInit = () => ({
@@ -106,4 +111,26 @@ export const storeAddFleetRequestSucceed = ({message}) => ({
 // Set add fleet reset data into store
 export const storeAddFleetRequestReset = () => ({
     type: STORE_ADD_FLEET_REQUEST_RESET
+});
+// ======================================================== Cancel fleet
+// Set cancel fleet init data into store
+export const storeCancelFleetRequestInit = () => ({
+    type: STORE_CANCEL_FLEET_REQUEST_INIT
+});
+
+// Set cancel fleet failed data into store
+export const storeCancelFleetRequestFailed = ({message}) => ({
+    message,
+    type: STORE_CANCEL_FLEET_REQUEST_FAILED
+});
+
+// Set cancel fleet succeeded data into store
+export const storeCancelFleetRequestSucceed = ({message}) => ({
+    message,
+    type: STORE_CANCEL_FLEET_REQUEST_SUCCEEDED
+});
+
+// Set cancel fleet reset data into store
+export const storeCancelFleetRequestReset = () => ({
+    type: STORE_CANCEL_FLEET_REQUEST_RESET
 });

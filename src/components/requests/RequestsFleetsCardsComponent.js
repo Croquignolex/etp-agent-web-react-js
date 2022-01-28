@@ -1,15 +1,16 @@
 import PropTypes from "prop-types";
 import React, {useState} from 'react';
 
+import LoaderComponent from "../LoaderComponent";
 import OperatorComponent from "../OperatorComponent";
-import {DONE, PENDING} from "../../constants/typeConstants";
 import FormModalComponent from "../modals/FormModalComponent";
 import {fleetTypeBadgeColor} from "../../functions/typeFunctions";
+import {CANCEL, DONE, PENDING} from "../../constants/typeConstants";
 import {dateToString, formatNumber} from "../../functions/generalFunctions";
 import SimDetailsContainer from "../../containers/sims/SimDetailsContainer";
 
 // Component
-function RequestsFleetsCardsComponent({fleets}) {
+function RequestsFleetsCardsComponent({fleets, handleCancelModalShow}) {
     // Local states
     const [simDetailsModal, setSimDetailsModal] = useState({show: false, header: "DETAIL DU COMPTE", id: ''});
 
@@ -63,9 +64,22 @@ function RequestsFleetsCardsComponent({fleets}) {
                                         </li>
                                         <li className="list-group-item">
                                             {item.status === DONE && <b className="text-success text-bold">Flottée</b>}
+                                            {item.status === CANCEL && <b className="text-danger text-bold">Annulé</b>}
                                             {item.status === PENDING && <b className="text-danger text-bold">En attente de flottage</b>}
                                         </li>
                                     </ul>
+                                    {(item.status === PENDING) && (
+                                        <div className="mt-3 text-right">
+                                            {item.actionLoader ? <LoaderComponent little={true} /> : (
+                                                <button type="button"
+                                                        className="btn btn-danger btn-sm"
+                                                        onClick={() => handleCancelModalShow(item)}
+                                                >
+                                                    <i className="fa fa-times" /> Annuler
+                                                </button>
+                                            )}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -89,7 +103,8 @@ function RequestsFleetsCardsComponent({fleets}) {
 
 // Prop types to ensure destroyed props data type
 RequestsFleetsCardsComponent.propTypes = {
-    fleets: PropTypes.array.isRequired
+    fleets: PropTypes.array.isRequired,
+    handleCancelModalShow: PropTypes.func,
 };
 
 export default React.memo(RequestsFleetsCardsComponent);
