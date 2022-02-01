@@ -54,9 +54,11 @@ function SettingsPage({settings, request, dispatch, location}) {
             cards: [
                 {value: setting.CARD_FLEETS_REQUESTS_MTN, label: setting.LABEL_FLEETS_REQUESTS_MTN},
                 {value: setting.CARD_FLEETS_REQUESTS_YUP, label: setting.LABEL_FLEETS_REQUESTS_YUP},
+                {value: setting.CARD_FLEETS_REQUESTS_YOOMEE, label: setting.LABEL_FLEETS_REQUESTS_YOOMEE},
                 {value: setting.CARD_CLEARANCES_REQUEST_MTN, label: setting.LABEL_CLEARANCES_REQUEST_MTN},
                 {value: setting.CARD_CLEARANCES_REQUEST_YUP, label: setting.LABEL_CLEARANCES_REQUEST_YUP},
                 {value: setting.CARD_FLEETS_REQUESTS_ORANGE, label: setting.LABEL_FLEETS_REQUESTS_ORANGE},
+                {value: setting.CARD_CLEARANCES_REQUEST_YOOMEE, label: setting.LABEL_CLEARANCES_REQUEST_YOOMEE},
                 {value: setting.CARD_CLEARANCES_REQUEST_ORANGE, label: setting.LABEL_CLEARANCES_REQUEST_ORANGE},
             ],
             charts: [
