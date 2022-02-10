@@ -6,13 +6,11 @@ import HeaderComponent from "../components/HeaderComponent";
 import {SETTINGS_PAGE} from "../constants/pageNameConstants";
 import {emitSettingsUpdate} from "../redux/settings/actions";
 import {requiredChecker} from "../functions/checkerFunctions";
-import InputComponent from "../components/form/InputComponent";
 import {playWarningSound} from "../functions/playSoundFunctions";
 import ButtonComponent from "../components/form/ButtonComponent";
 import SelectComponent from "../components/form/SelectComponent";
 import AppLayoutContainer from "../containers/AppLayoutContainer";
 import ErrorAlertComponent from "../components/ErrorAlertComponent";
-import TextareaComponent from "../components/form/TextareaComponent";
 import CheckBoxComponent from "../components/form/CheckBoxComponent";
 import {storeSettingsRequestReset} from "../redux/requests/settings/actions";
 import {DEFAULT_ARRAY_FORM_DATA, DEFAULT_FORM_DATA} from "../constants/defaultConstants";
@@ -22,11 +20,11 @@ import {applySuccess, requestFailed, requestLoading, requestSucceeded} from "../
 function SettingsPage({settings, request, dispatch, location}) {
     // Local state
     const [sound, setSound] = useState(settings.sound);
-    const [bars, setBars] = useState({...DEFAULT_ARRAY_FORM_DATA, data: settings.bars});
+    // const [bars, setBars] = useState({...DEFAULT_ARRAY_FORM_DATA, data: settings.bars});
     const [session, setSession] = useState({...DEFAULT_FORM_DATA, data: settings.session});
     const [cards, setCards] = useState({...DEFAULT_ARRAY_FORM_DATA, data: settings.cards});
-    const [charts, setCharts] = useState({...DEFAULT_ARRAY_FORM_DATA, data: settings.charts});
-    const [description, setDescription] = useState({...DEFAULT_FORM_DATA, data: settings.description});
+    // const [charts, setCharts] = useState({...DEFAULT_ARRAY_FORM_DATA, data: settings.charts});
+    // const [description, setDescription] = useState({...DEFAULT_FORM_DATA, data: settings.description});
 
     // Local effects
     useEffect(() => {
@@ -73,7 +71,7 @@ function SettingsPage({settings, request, dispatch, location}) {
         setCards({...cards,  isValid: true, data})
     }
 
-    const handleChartSelect = (data) => {
+    /*const handleChartSelect = (data) => {
         shouldResetErrorData();
         setCharts({...charts,  isValid: true, data})
     }
@@ -82,13 +80,13 @@ function SettingsPage({settings, request, dispatch, location}) {
         shouldResetErrorData();
         setBars({...bars,  isValid: true, data})
     }
-
+*/
     const handleSoundCheckBox = (data) => {
         shouldResetErrorData();
         setSound(!data);
     }
 
-    const handleSessionInput = (data) => {
+    /*const handleSessionInput = (data) => {
         shouldResetErrorData();
         setSession({...session, isValid: true, data})
     }
@@ -96,7 +94,7 @@ function SettingsPage({settings, request, dispatch, location}) {
     const handleDescriptionInput = (data) => {
         shouldResetErrorData();
         setDescription({...description, isValid: true, data})
-    }
+    }*/
 
     // Reset error alert
     const shouldResetErrorData = () => {
@@ -115,11 +113,11 @@ function SettingsPage({settings, request, dispatch, location}) {
         if(validationOK) {
             dispatch(emitSettingsUpdate({
                 sound: sound,
-                bars: bars.data,
+                // bars: bars.data,
                 cards: cards.data,
-                charts: charts.data,
+                // charts: charts.data,
                 session: _session.data,
-                description: description.data
+                // description: description.data
             }));
         }
         else playWarningSound();
@@ -152,7 +150,7 @@ function SettingsPage({settings, request, dispatch, location}) {
                                                         />
                                                     </div>
                                                 </div>
-                                                <div className='row'>
+                                                {/*<div className='row'>
                                                     <div className='col-12'>
                                                         <SelectComponent multi={true}
                                                                          input={charts}
@@ -175,7 +173,7 @@ function SettingsPage({settings, request, dispatch, location}) {
                                                                          title='Choisir les différents graphes de progréssion'
                                                         />
                                                     </div>
-                                                </div>
+                                                </div>*/}
                                                 <div className='row'>
                                                     <div className='col-12'>
                                                         <label htmlFor='sound'>Jouer le son</label>
@@ -186,7 +184,7 @@ function SettingsPage({settings, request, dispatch, location}) {
                                                         />
                                                     </div>
                                                 </div>
-                                                <div className='row'>
+                                               {/* <div className='row'>
                                                     <div className='col-sm-6'>
                                                         <InputComponent type='text'
                                                                         input={session}
@@ -202,7 +200,7 @@ function SettingsPage({settings, request, dispatch, location}) {
                                                                            handleInput={handleDescriptionInput}
                                                         />
                                                     </div>
-                                                </div>
+                                                </div>*/}
                                                 <div className="form-group row">
                                                     <ButtonComponent processing={requestLoading(request)} />
                                                 </div>
